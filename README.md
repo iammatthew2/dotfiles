@@ -15,3 +15,5 @@ ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/screenrc ~/.screenrc
 ln -sf ~/.dotfiles/vim-configs  ~/.vim
 ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc
+
+When initing, after init run git submodule update to get all the submodules
