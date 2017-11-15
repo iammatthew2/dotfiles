@@ -1,0 +1,21 @@
+## all bash methods should be here
+##call gitFind with an argument to search for in addition to your user name
+gitFind() {
+  if [ ! -z $1 ]
+  then
+    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i  "${2-Matthew}" | grep -i "$1"
+  else
+    echo "one or two arguments required: gitFind <query> or gitFind <query1> <query2>/n
+    If only one argument, second argument is defaulted to 'Matthew'"
+  fi
+}
+
+##get info on port 9000 or some other specified port
+port() {
+  echo "Running lsof -n -iTCP: on ports 9000 thru 9005"
+  for i in {9000..9005}
+    do
+      echo "Port $i: $(lsof -n -iTCP:$i)"
+    # alternative command - might be more redhat friendly: lsof -n -iTCP:$i
+    done
+}

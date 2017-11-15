@@ -1,0 +1,17 @@
+## all public aliases
+
+alias evim='vim ~/.vim/vimrc'
+alias egit='vim ~/.gitconfig'
+alias rbash='. ~/.bash_profile'
+alias ebashp='vim ~/.bash_profile'
+alias ebashpri='vim ~/.dotfiles/bash_private'
+alias ebasha='vim ~/.dotfiles/bash_aliases'
+alias ebashm='vim ~/.dotfiles/bash_methods'
+alias ..='cd ..'
+alias l='ls -l'
+alias ll='ls -la'
+alias lll='ls -lha'
+alias ip='ifconfig en0 | grep inet | grep -v inet6'
+alias notes='cd ~/Dropbox/notes/work'
+alias nox='vim ~/Dropbox/notes/work'
+alias dot='cd ~/.dotfiles/'
