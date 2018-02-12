@@ -1,4 +1,5 @@
 export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
+export STORK_GIT_CAMPAIGNS_DIR=/Users/$USER/flock-templates_trunk
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
 export NVM_DIR="$HOME/.nvm"
