@@ -4,23 +4,53 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
 export NVM_DIR="$HOME/.nvm"
 
+##### general settings (methods and aliases go below)
+bind Space:magic-space
 HISTFILESIZE=10000
 
 source ~/.dotfiles/scripts/git-completion.bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# include bash_aliases if it exists
-if [ -f ~/.dotfiles/bash_aliases ]; then
-    . ~/.dotfiles/bash_aliases
-fi
+##### methods
+##call gitFind with an argument to search for in addition to your user name
+gitFind() {
+  if [ ! -z $1 ]
+  then
+    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i  "${2-Matthew}" | grep -i "$1"
+  else
+    echo "one or two arguments required: gitFind <query> or gitFind <query1> <query2>/n
+    If only one argument, second argument is defaulted to 'Matthew'"
+  fi
+}
 
-# include bashrc_methods if it exists
-if [ -f ~/.dotfiles/bash_methods ]; then
-    . ~/.dotfiles/bash_methods
-fi
+##get info on port 9000 or some other specified port
+port() {
+  echo "Running lsof -n -iTCP: on ports 9000 thru 9005"
+  for i in {9000..9005} 
+    do
+      echo "Port $i: $(lsof -n -iTCP:$i)"
+    # alternative command - might be more redhat friendly: lsof -n -iTCP:$i
+    done
+}
 
 # incluse bash_private if it exists
 if [ -f ~/.dotfiles/bash_private ]; then
    . ~/.dotfiles/bash_private
 fi
 
-bind Space:magic-space
+##### aliases
+alias evim='vim ~/.vim/vimrc'
+alias egit='vim ~/.gitconfig'
+alias rbash='. ~/.bash_profile'
+alias ebash='vim ~/.bash_profile'
+alias ebashpri='vim ~/.dotfiles/bash_private'
+alias ..='cd ..'
+alias l='ls -l'
+alias ll='ls -la'
+alias lll='ls -lha'
+alias ip='ifconfig en0 | grep inet | grep -v inet6'
+alias notes='cd ~/Dropbox/notes/work'
+alias nox='vim ~/Dropbox/notes/work'
+alias dot='cd ~/.dotfiles/'
