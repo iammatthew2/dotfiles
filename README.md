@@ -2,7 +2,7 @@ Using git submodules to pull in nested git repos, including my personal
 vim-configs and various thrid-party vim plugins
 
 How to replicate this dotfiles setup on new machine:
-git clone --recursive https://github.com/username/reponame.git
+git clone --recursive git@github.com:iammatthew2/dotfiles.git
 
 ^ can also be used to pull in a mid-level nested repo, such as vim-configs
 

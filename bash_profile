@@ -1,4 +1,11 @@
-export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
+##  export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
+if [ "$(uname)" == "Darwin" ]; then
+  export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  export PS1='\[\e[1;33m\]lin@\w${text}$\[\e[m\] '
+else
+  export PS1='\u@\h \w${text}$'
+fi
 export STORK_GIT_CAMPAIGNS_DIR=/Users/$USER/flock-templates_trunk
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
