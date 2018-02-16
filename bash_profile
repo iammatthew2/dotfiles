@@ -1,24 +1,27 @@
-##  export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
 if [ "$(uname)" == "Darwin" ]; then
   export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  export PS1='\[\e[1;33m\]lin@\w${text}$\[\e[m\] '
+  export PS1='\[\e[1;33m\]linux@\w${text}$\[\e[m\] '
 else
   export PS1='\u@\h \w${text}$'
 fi
-export STORK_GIT_CAMPAIGNS_DIR=/Users/$USER/flock-templates_trunk
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
-export NVM_DIR="$HOME/.nvm"
 
 ##### general settings (methods and aliases go below)
+# include bash_private if it exists
+if [ -f ~/.dotfiles/bash_private ]; then
+   . ~/.dotfiles/bash_private
+fi
+
 bind Space:magic-space
 HISTFILESIZE=10000
 
 source ~/.dotfiles/scripts/git-completion.bash
+
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # load nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # load nvm bash_completion
 
 ##### methods
 ##call gitFind with an argument to search for in addition to your user name
@@ -41,11 +44,6 @@ port() {
     # alternative command - might be more redhat friendly: lsof -n -iTCP:$i
     done
 }
-
-# incluse bash_private if it exists
-if [ -f ~/.dotfiles/bash_private ]; then
-   . ~/.dotfiles/bash_private
-fi
 
 ##### aliases
 alias evim='vim ~/.vim/vimrc'
