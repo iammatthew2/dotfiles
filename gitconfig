@@ -20,3 +20,6 @@
 	statusHints = false
 [core]
 	excludesfile = ~/.gitignore
+[user]
+	email = matthew.villeneuve@gmail.com
+	name = Matthew Villeneuve

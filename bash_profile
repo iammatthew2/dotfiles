@@ -1,9 +1,7 @@
 if [ "$(uname)" == "Darwin" ]; then
   export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  export PS1='\[\e[1;33m\]linux@\w${text}$\[\e[m\] '
 else
-  export PS1='\u@\h \w${text}$'
+  export PS1='\[\e[1;33m\]\h@\w${text}$\[\e[m\] '
 fi
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
