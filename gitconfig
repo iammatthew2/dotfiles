@@ -19,7 +19,7 @@
 [advice]
 	statusHints = false
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/mvillene/.gitignore_global
 [user]
 	email = matthew.villeneuve@gmail.com
 	name = Matthew Villeneuve

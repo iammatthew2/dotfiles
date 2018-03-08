@@ -1,5 +1,5 @@
 if [ "$(uname)" == "Darwin" ]; then
-  export PS1='\[\e[1;32m\]mac@\w${text}$\[\e[m\] '
+  export PS1='\[\e[1;32m\]\h\w${text}$\[\e[m\] '
 else
   export PS1='\[\e[1;33m\]\h@\w${text}$\[\e[m\] '
 fi
@@ -8,8 +8,8 @@ export CLICOLOR=1
 
 ##### general settings (methods and aliases go below)
 # include bash_private if it exists
-if [ -f ~/.dotfiles/bash_private ]; then
-   . ~/.dotfiles/bash_private
+if [ -f ~/.secrets/bash_private ]; then
+   . ~/.secrets/bash_private
 fi
 
 bind Space:magic-space
@@ -26,10 +26,10 @@ export NVM_DIR="$HOME/.nvm"
 gitFind() {
   if [ ! -z $1 ]
   then
-    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i  "${2-Matthew}" | grep -i "$1"
+    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i "${2-$(git config user.name)}" | grep -i "$1"
   else
     echo "one or two arguments required: gitFind <query> or gitFind <query1> <query2>/n
-    If only one argument, second argument is defaulted to 'Matthew'"
+    If only one argument, second argument is defaulted to git config user.name'"
   fi
 }
 
@@ -45,10 +45,12 @@ port() {
 
 ##### aliases
 alias evim='vim ~/.vim/vimrc'
+alias vim='vi'
 alias egit='vim ~/.gitconfig'
+alias etmux='vim ~/.tmux.conf'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
-alias ebashpri='vim ~/.dotfiles/bash_private'
+alias ebashpri='vim ~/.secrets/bash_private'
 alias ..='cd ..'
 alias l='ls -l'
 alias ll='ls -la'
