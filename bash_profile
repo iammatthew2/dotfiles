@@ -44,13 +44,12 @@ port() {
 }
 
 ##### aliases
-alias evim='vim ~/.vim/vimrc'
 alias vim='vi'
+alias evim='vim ~/.vim/vimrc'
 alias egit='vim ~/.gitconfig'
 alias etmux='vim ~/.tmux.conf'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
-alias ebashpri='vim ~/.secrets/bash_private'
 alias ewatch='vim ~/.watchman-processor.config.js'
 alias ..='cd ..'
 alias l='ls -l'
