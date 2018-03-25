@@ -46,7 +46,7 @@ port() {
 ##### aliases
 alias vim='vi'
 alias evim='vim ~/.vim/vimrc'
-alias egit='vim ~/.gitconfig'
+alias egit='vim ~/.dotfiles/gitconfig'
 alias etmux='vim ~/.tmux.conf'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
