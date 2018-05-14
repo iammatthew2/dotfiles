@@ -7,6 +7,10 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
 
 ##### general settings (methods and aliases go below)
+# unified bash history
+shopt -s histappend
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
 # include bash_private if it exists
 if [ -f ~/.secrets/bash_private ]; then
    . ~/.secrets/bash_private
