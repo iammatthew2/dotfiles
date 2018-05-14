@@ -39,12 +39,13 @@ gitFind() {
 
 ##get info on port 9000 or some other specified port
 port() {
-  echo "Running lsof -n -iTCP: on ports 9000 thru 9005"
+  echo "Running lsof -n -iTCP: on ports 9000 thru 9005 and 9999"
   for i in {9000..9005} 
     do
       echo "Port $i: $(lsof -n -iTCP:$i)"
     # alternative command - might be more redhat friendly: lsof -n -iTCP:$i
     done
+    echo "Port 9999: $(lsof -n -iTCP:9999)"
 }
 
 ##### aliases
@@ -59,7 +60,6 @@ alias ..='cd ..'
 alias l='ls -l'
 alias ll='ls -la'
 alias lll='ls -lha'
-alias ip='ifconfig en0 | grep inet | grep -v inet6'
 alias notes='cd ~/Dropbox/notes/work'
 alias nox='vim ~/Dropbox/notes/work'
 alias dot='cd ~/.dotfiles/'
