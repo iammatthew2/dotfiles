@@ -19,11 +19,14 @@ fi
 bind Space:magic-space
 HISTFILESIZE=10000
 
-source ~/.dotfiles/scripts/git-completion.bash
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # load nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # load nvm bash_completion
+
+##### scripts
+source ~/.dotfiles/scripts/git-completion.bash
+# the z dir completion helper
+. ~/.dotfiles/scripts/z/z.sh
 
 ##### methods
 ##call gitFind with an argument to search for in addition to your user name
