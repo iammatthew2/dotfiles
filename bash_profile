@@ -46,6 +46,7 @@ port() {
     # alternative command - might be more redhat friendly: lsof -n -iTCP:$i
     done
     echo "Port 9999: $(lsof -n -iTCP:9999)"
+    echo "Port 4443: $(lsof -n -iTCP:4443)"
 }
 
 ##### aliases
