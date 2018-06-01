@@ -1,22 +1,32 @@
-Using git submodules to pull in nested git repos, including my personal
-vim-configs and various thrid-party vim plugins
+Dotfiles: a set of public configs
+====
 
-How to replicate this dotfiles setup on new machine:
-git clone --recursive https://github.com/iammatthew2/dotfiles.git
+This repo makes use of git submodules to pull in a few other repos: 
+vim configs, vim modules and bash scripts
 
-Now commit those changes: then: git submodule add
-https://github.com/iammatthew2/vim-configs vim-configs
+## Setup
+You are going to need to: git clone, create the symlinks, and add dotfile configs to local .gitconfig. See details below.
 
-Then, setup symlinks:
-$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
-$ ln -sf ~/.dotfiles/screenrc ~/.screenrc
-$ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-$ ln -sf ~/.dotfiles/vim-configs  ~/.vim
-$ ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc
+### Install:
+`$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
 
-Then add dotfile configs to your local .gitconfig:
-$ git config --global core.excludesfile ~/.dotfiles/gitignore_global
-$ git config --global include.path ~/.dotfiles/gitconfig
+### Setup symlinks:
+* `$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile`
+* `$ ln -sf ~/.dotfiles/screenrc ~/.screenrc`
+* `$ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf`
+* `$ ln -sf ~/.dotfiles/vim-configs  ~/.vim`
+* `$ ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
 
+### Add dotfile configs to your local .gitconfig:
+* `$ git config --global core.excludesfile ~/.dotfiles/gitignore_global`
+* `$ git config --global include.path ~/.dotfiles/gitconfig`
 
-When initing, after init run git submodule update to get all the submodules
+## Working with git submodules
+### Adding a new submodule?
+
+`$ git submdule add <gitPathHere> parentDirectory`
+
+Example: `$ git submodule add https://github.com/rupa/z.git scripts/z `
+
+### Doing a git pull and receiving a new submodule? You will need to init it:
+`$ git submodule update --init local/path/to/submodule/folder`
