@@ -52,6 +52,18 @@ port() {
     echo "Port 4443: $(lsof -n -iTCP:4443)"
 }
 
+##toggle the host file to one of two options
+toggleHost() {
+  read -r line < /etc/hosts
+  if [[ $line = *"local"* ]]; then
+    echo "Toggling the host file from local to server"
+    sudo cp /etc/hosts_server /etc/hosts
+  else
+    echo "Toggling the host file from server to local"
+    sudo cp /etc/hosts_local /etc/hosts
+  fi
+}
+
 ##### aliases
 alias vim='vi'
 alias evim='vim ~/.vim/vimrc'
@@ -66,4 +78,3 @@ alias ll='ls -la'
 alias lll='ls -lha'
 alias notes='cd ~/Dropbox/notes/work'
 alias nox='vim ~/Dropbox/notes/work'
-alias dot='cd ~/.dotfiles/'
