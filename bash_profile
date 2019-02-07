@@ -5,7 +5,7 @@ else
 fi
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
-
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 ##### general settings (methods and aliases go below)
 # unified bash history
 shopt -s histappend
@@ -72,10 +72,10 @@ alias etmux='vim ~/.tmux.conf'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
 alias ewatch='vim ~/.watchman-processor.config.js'
+alias code='code .'
 alias ..='cd ..'
 alias l='ls -l'
 alias ll='ls -la'
 alias lll='ls -lha'
 alias notes='cd ~/Dropbox/notes/work'
 alias nox='vim ~/Dropbox/notes/work'
-alias vs='code .'
