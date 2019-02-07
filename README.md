@@ -4,9 +4,18 @@
 This repository makes use of git sub-modules to pull in a few other repositories:
 vim configs, vim modules and bash scripts
 
+These dotfiles support:
+
+* [bash](https://www.gnu.org/software/bash/)
+* [vim](https://www.vim.org/)
+* screen - legacy configs. Use tmux instead.
+* [tmux](https://github.com/tmux/tmux)
+* [ripgrep](https://github.com/BurntSushi/ripgrep)
+* [git](https://git-scm.com/docs/git-config)
+
 ## Setup
 
-Using this set of dotfiles requires: git cloning this repository, creating the symlinks to point to the included dotfiles, and  acouple config changes to the local .gitconfig settings on your machine. See details below.
+Using this set of dotfiles requires: git cloning this repository, creating the symlinks to point to the included dotfiles, and  a couple config changes to the local .gitconfig settings on your machine. See details below.
 
 ### Install
 
