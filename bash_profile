@@ -42,7 +42,7 @@ gitFind() {
 
 ##get info on port 9000 or some other specified port
 port() {
-  echo "Running lsof -n -iTCP: on ports 9000 thru 9005 and 9999"
+  echo "Running lsof -n -iTCP: on ports 9000 thru 9005 and 9999, 4443, 4200"
   for i in {9000..9005} 
     do
       echo "Port $i: $(lsof -n -iTCP:$i)"
@@ -50,6 +50,7 @@ port() {
     done
     echo "Port 9999: $(lsof -n -iTCP:9999)"
     echo "Port 4443: $(lsof -n -iTCP:4443)"
+    echo "Port 4200: $(lsof -n -iTCP:4200)"
 }
 
 ##toggle the host file to one of two options
