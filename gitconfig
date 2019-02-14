@@ -10,6 +10,7 @@
   dhn = diff HEAD^ HEAD --name-only
   lg = log --graph --pretty=format:'%C(red black)%h%Creset -%C(yellow black)%d%Creset %<(50,trunc)%s %C(green black)(%cr) %Cresetby: %C(yellow black)%an' -n 8
   sh = show --oneline --name-only
+  df = ! git dn | grep -i
 
 [color]
 	diff = auto
