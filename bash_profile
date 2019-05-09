@@ -55,6 +55,7 @@ port() {
 
 ##toggle the host file to one of two options
 toggleHost() {
+  echo "FYI: server IP: $(getServerIp)"
   read -r line < /etc/hosts
   if [[ $line = *"local"* ]]; then
     echo "Toggling the host file from local to server"
@@ -65,6 +66,15 @@ toggleHost() {
   fi
 }
 
+##get server ip address via ssh cmd
+getServerIp() {
+  if [ -z $SERVER_BOX ]
+  then echo "Expected var $SERVER_BOX to be set for this utility. Please add this to your bash config."
+  else
+    echo "$(ssh $SERVER_BOX "hostname -I" | awk '{print $1}' FS=" ")"
+  fi
+}
+
 ##### aliases
 alias vim='vi'
 alias evim='vim ~/.vim/vimrc'
@@ -72,6 +82,7 @@ alias egit='vim ~/.dotfiles/gitconfig'
 alias etmux='vim ~/.tmux.conf'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
+alias erip='vim ~/.ripgreprc'
 alias ewatch='vim ~/.watchman-processor.config.js'
 alias code='code .'
 alias ..='cd ..'
