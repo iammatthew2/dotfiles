@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ "$(uname)" == "Darwin" ]; then
   export PS1='\[\e[1;32m\]\h\w${text}$\[\e[m\] '
 else

@@ -25,6 +25,7 @@ Using this set of dotfiles requires: git cloning this repository, creating the s
 
 Run the following commands to add each of the symlinks:
 
+* `$ ln -sf ~/.dotfiles/zshrc ~/.zshrc`
 * `$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile`
 * `$ ln -sf ~/.dotfiles/screenrc ~/.screenrc`
 * `$ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf`

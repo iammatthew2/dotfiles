@@ -4,6 +4,7 @@
 	st = status -s
 	br = branch
 	ba = branch -a
+  brs= for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
 	com = checkout master
   dn = diff --name-only
   dh = diff HEAD^ HEAD
@@ -11,7 +12,7 @@
   lg = log --graph --pretty=format:'%C(red black)%h%Creset -%C(yellow black)%d%Creset %<(50,trunc)%s %C(green black)(%cr) %Cresetby: %C(yellow black)%an' -n 8
   sh = show --oneline --name-only
   df = ! git dn | grep -i
-
+  ca = commit --amend --no-edit
 [color]
 	diff = auto
 	status = auto
