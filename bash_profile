@@ -1,6 +1,12 @@
 #!/bin/bash
+# Git branch in prompt.
+
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
+}
+
 if [ "$(uname)" == "Darwin" ]; then
-  export PS1='\[\e[1;32m\]\h\w${text}$\[\e[m\] '
+  export PS1='\[\e[1;32m\]\h\[\e[m\]\[\e[1;30m\]\w\[\e[m\]\[\e[1;35m\]$(parse_git_branch)\[\e[m\]\[\e[1;32m\]$\[\e[m\] '
 else
   export PS1='\[\e[1;33m\]\h@\w${text}$\[\e[m\] '
 fi
@@ -8,9 +14,12 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 ##### general settings (methods and aliases go below)
-# unified bash history
-shopt -s histappend
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+# Killing this since it breaks command helpers like !!
+#unified bash history
+#shopt -s histappend
+#PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # include bash_private if it exists
 if [ -f ~/.secrets/bash_private ]; then

@@ -672,7 +672,7 @@ _git_checkout ()
 {
 	__git_has_doubledash && return
 
-	__gitcomp "$(__git_refs)"
+	__gitcomp "$(__git_heads)"
 }
 
 _git_cherry ()
