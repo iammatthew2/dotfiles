@@ -1,8 +1,6 @@
 
 # Dotfiles: a set of public configs
 
-Hello, Matthew!!!
-
 This repository makes use of git sub-modules to pull in a few other repositories:
 vim configs, vim modules and bash scripts
 
@@ -50,7 +48,7 @@ Add the git aliases to the local gitconfigs:
 
 ## Notes on working with git submodules
 
-On first install these notes below can be disregarded since we pull in the submodules in this repository via the `--recursive ` in the `git clone` command above. However, if/when this repository is updated with a new submodule (perhaps a vim module is added) are you add your own, then you would need to manually add the submodule as described below.
+On first install these notes below can be disregarded since we pull in the submodules in this repository via the `--recursive ` in the `git clone` command above. However, if/when this repository is updated with a new submodule (perhaps a vim module is added) or you add your own, then you would need to manually add the submodule as described below.
 
 ### Adding a new submodule
 
