@@ -12,6 +12,7 @@
   dhs = "!git diff HEAD^ HEAD $(git diff HEAD^ HEAD --name-only | fzf --height 20% --reverse)"
   ds = "!git diff $(git status -s | awk '{print $2}' | fzf --height 20% --reverse)"
   lg = log --graph --pretty=format:'%C(red black)%h%Creset -%C(yellow black)%d%Creset %<(50,trunc)%s %C(green black)(%cr) %Cresetby: %C(yellow black)%an' -n 15
+  lm = log --format=%B -n 1
   sh = show --oneline --name-only
   df = ! git dn | grep -i
   ca = commit --amend --no-edit
