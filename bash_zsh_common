@@ -6,6 +6,8 @@ if [ -f ~/.secrets/bash_private ]; then
    . ~/.secrets/bash_private
 fi
 
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 ##### methods
 ##call gitFind with an argument to search for in addition to your user name
 gitFind() {
@@ -53,6 +55,15 @@ getServerIp() {
   fi
 }
 
+#alias rgi="rg --type-add 'web:*.{html,css,scss,hbs,tl,js}' --type-add 'scss:*.scss' --type-add 'test:*{test,Test,TEST}*'" 
+rg() {
+    if [ -t 1 ]; then
+        command rg -p "$@" | less -RFX
+    else
+        command rg "$@"
+    fi
+}
+
 ##### aliases
 alias vim='vi'
 alias evim='vim ~/.vim/vimrc'
@@ -62,6 +73,7 @@ alias rzsh='. ~/.zshrc'
 alias ezsh='vim ~/.zshrc'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
+alias ebashz='vim ~/.bash_zsh_common'
 alias erip='vim ~/.ripgreprc'
 alias ewatch='vim ~/.watchman-processor.config.js'
 alias code='code .'
@@ -71,4 +83,3 @@ alias ll='ls -la'
 alias lll='ls -lha'
 alias notes='cd ~/Dropbox/notes/work'
 alias nox='vim ~/Dropbox/notes/work'
-alias rg="rg --type-add 'web:*.{html,css,scss,hbs,tl,js}' --type-add 'scss:*.scss' --type-add 'test:*{test,Test,TEST}*'" 

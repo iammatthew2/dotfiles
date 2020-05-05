@@ -17,15 +17,12 @@ else
 fi
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-##### general settings (methods and aliases go below)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 bind Space:magic-space
 
 HISTFILESIZE=10000
-
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -37,3 +34,6 @@ source ~/.dotfiles/scripts/git-completion.bash
 
 # the z dir completion helper
 . ~/.dotfiles/scripts/z/z.sh
+
+export VOLTA_HOME="/Users/mvillene/.volta"
+grep --silent "$VOLTA_HOME/bin" <<< $PATH || export PATH="$VOLTA_HOME/bin:$PATH"
