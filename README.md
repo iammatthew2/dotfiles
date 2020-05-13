@@ -1,4 +1,3 @@
-
 # Dotfiles: a set of public configs
 
 This repository makes use of git sub-modules to pull in a few other repositories:
@@ -8,33 +7,45 @@ These dotfiles support:
 
 * [bash](https://www.gnu.org/software/bash/)
 * [vim](https://www.vim.org/)
-* screen - legacy configs. Use tmux instead.
 * [tmux](https://github.com/tmux/tmux)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [git](https://git-scm.com/docs/git-config)
 
+---
+
 ## Setup
 
-Using this set of dotfiles requires: git cloning this repository, creating the symlinks to point to the included dotfiles, and  a couple config changes to the local .gitconfig settings on your machine. See details below.
+Using this set of dotfiles requires a bit of quick setup:
 
-### Install
+* git clone this repository
+* create the symlinks to point to the included dotfiles
+* config changes to the local .gitconfig settings on your machine.
+
+See details below to get started...
+
+---
+
+### Clone the repo
 
 `$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
 
-### Setup symlinks
+---
+
+### Create symlinks
 
 Run the following commands to add each of the symlinks:
 
 * `$ ln -sf ~/.dotfiles/zshrc ~/.zshrc`
 * `$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile`
-* `$ ln -sf ~/.dotfiles/screenrc ~/.screenrc`
 * `$ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf`
 * `$ ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc`
 * `$ ln -sf ~/.dotfiles/vim-configs  ~/.vim`
 * `$ ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
 
 Or just run this ugly batch of commands:
-`$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile && ln -sf ~/.dotfiles/screenrc ~/.screenrc && ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/.dotfiles/vim-configs  ~/.vim && ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
+`$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile && ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/.dotfiles/vim-configs  ~/.vim && ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
+
+---
 
 ### Add dotfile configs to your local .gitconfig
 
@@ -45,6 +56,8 @@ Add the gitignore settings dotfile to the local gitconfigs:
 Add the git aliases to the local gitconfigs:
 
 * `$ git config --global include.path ~/.dotfiles/gitconfig`
+
+---
 
 ## Notes on working with git submodules
 
