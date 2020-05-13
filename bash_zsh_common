@@ -35,7 +35,7 @@ port() {
 
 ##toggle the host file to one of two options
 toggleHost() {
-  echo "FYI: server IP: $(getServerIp)"
+  echo "Get server IP with: getServerIp"
   read -r line < /etc/hosts
   if [[ $line = *"local"* ]]; then
     echo "Toggling the host file from local to server"
