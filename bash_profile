@@ -34,3 +34,5 @@ source ~/.dotfiles/scripts/git-completion.bash
 
 # the z dir completion helper
 . ~/.dotfiles/scripts/z/z.sh
+export VOLTA_HOME="/Users/mvillene/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

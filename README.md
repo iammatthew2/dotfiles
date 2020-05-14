@@ -41,9 +41,10 @@ Run the following commands to add each of the symlinks:
 * `$ ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc`
 * `$ ln -sf ~/.dotfiles/vim-configs  ~/.vim`
 * `$ ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
+* `$ ln -sf ~/.dotfiles/zshrc ~/.zshrc`
 
 Or just run this ugly batch of commands:
-`$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile && ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/.dotfiles/vim-configs  ~/.vim && ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
+`$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile && ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/.dotfiles/vim-configs  ~/.vim && ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc && ln -sf ~/.dotfiles/zshrc ~/.zshrc`
 
 ---
 
