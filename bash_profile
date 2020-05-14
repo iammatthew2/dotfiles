@@ -36,3 +36,6 @@ source ~/.dotfiles/scripts/git-completion.bash
 . ~/.dotfiles/scripts/z/z.sh
 export VOLTA_HOME="/Users/mvillene/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

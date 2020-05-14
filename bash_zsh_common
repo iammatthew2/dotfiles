@@ -13,7 +13,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 gitFind() {
   if [ ! -z $1 ]
   then
-    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i "${2-$(git config user.name)}" | grep -i "$1" | head -n 25
+    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i "${2-$(git config user.name)}" | grep -i "$1" | head -n 55
   else
     echo "one or two arguments required: gitFind <query> or gitFind <query1> <query2>/n
     If only one argument, second argument is defaulted to git config user.name'"
@@ -33,15 +33,18 @@ port() {
     echo "Port 4200: $(lsof -n -iTCP:4200)"
 }
 
-##toggle the host file to one of two options
+##toggle the host file from local, server1, server2 
 toggleHost() {
   echo "Get server IP with: getServerIp"
   read -r line < /etc/hosts
   if [[ $line = *"local"* ]]; then
-    echo "Toggling the host file from local to server"
-    sudo cp /etc/hosts_server /etc/hosts
+    echo "Toggling the host file from local to server1"
+    sudo cp /etc/hosts_server1 /etc/hosts
+  elif [[ $line = *"server1"* ]]; then
+    echo "Toggling the host file from server1 to server2"
+    sudo cp /etc/hosts_server2 /etc/hosts
   else
-    echo "Toggling the host file from server to local"
+    echo "Toggling the host file from server2 to local"
     sudo cp /etc/hosts_local /etc/hosts
   fi
 }
@@ -51,7 +54,12 @@ getServerIp() {
   if [ -z $SERVER_BOX ]
   then echo "Expected var $SERVER_BOX to be set for this utility. Please add this to your bash config."
   else
-    echo "$(ssh $SERVER_BOX "hostname -I" | awk '{print $1}' FS=" ")"
+    echo "server ip: $(ssh $SERVER_BOX "hostname -I" | awk '{print $1}' FS=" ")"
+  fi
+  if [ -z $SERVER_BOX_@ ]
+  then echo "Can add  var $SERVER_BOX_2 to be set for this utility."
+  else
+    echo "server_2 ip: $(ssh $SERVER_BOX_2 "hostname -I" | awk '{print $1}' FS=" ")"
   fi
 }
 
