@@ -15,19 +15,17 @@ These dotfiles support:
 
 ## Setup
 
-Using this set of dotfiles requires a bit of quick setup:
+These dot files can be installed with with the included install script or manually
 
-* git clone this repository
-* create the symlinks to point to the included dotfiles
-* config changes to the local .gitconfig settings on your machine.
+* Running the install script:
+  * Clone the repo: `$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
+  * Install: `$ cd dotfiles && . install.sh`
 
-See details below to get started...
+* Manual install:
+  * Clone the repo: `$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
+  * Create symlinks (see below)
+  * Config changes to local .gitconfig settings (see below)
 
----
-
-### Clone the repo
-
-`$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
 
 ---
 
@@ -42,11 +40,6 @@ Run the following commands to add each of the symlinks:
 * `$ ln -sf ~/dotfiles/vim-configs  ~/.vim`
 * `$ ln -sf ~/dotfiles/vim-configs/vimrc ~/.vimrc`
 * `$ ln -sf ~/dotfiles/zshrc ~/.zshrc`
-
-Or just run this ugly batch of commands:
-`$ ln -sf ~/dotfiles/bash_profile ~/.bash_profile && ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/dotfiles/vim-configs  ~/.vim && ln -sf ~/dotfiles/vim-configs/vimrc ~/.vimrc && ln -sf ~/dotfiles/zshrc ~/.zshrc`
-
----
 
 ### Add dotfile configs to your local .gitconfig
 
