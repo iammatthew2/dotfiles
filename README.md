@@ -35,16 +35,16 @@ See details below to get started...
 
 Run the following commands to add each of the symlinks:
 
-* `$ ln -sf ~/.dotfiles/zshrc ~/.zshrc`
-* `$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile`
-* `$ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf`
-* `$ ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc`
-* `$ ln -sf ~/.dotfiles/vim-configs  ~/.vim`
-* `$ ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc`
-* `$ ln -sf ~/.dotfiles/zshrc ~/.zshrc`
+* `$ ln -sf ~/dotfiles/zshrc ~/.zshrc`
+* `$ ln -sf ~/dotfiles/bash_profile ~/.bash_profile`
+* `$ ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf`
+* `$ ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc`
+* `$ ln -sf ~/dotfiles/vim-configs  ~/.vim`
+* `$ ln -sf ~/dotfiles/vim-configs/vimrc ~/.vimrc`
+* `$ ln -sf ~/dotfiles/zshrc ~/.zshrc`
 
 Or just run this ugly batch of commands:
-`$ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile && ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/.dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/.dotfiles/vim-configs  ~/.vim && ln -sf ~/.dotfiles/vim-configs/vimrc ~/.vimrc && ln -sf ~/.dotfiles/zshrc ~/.zshrc`
+`$ ln -sf ~/dotfiles/bash_profile ~/.bash_profile && ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf && ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc && ln -sf ~/dotfiles/vim-configs  ~/.vim && ln -sf ~/dotfiles/vim-configs/vimrc ~/.vimrc && ln -sf ~/dotfiles/zshrc ~/.zshrc`
 
 ---
 
@@ -52,11 +52,11 @@ Or just run this ugly batch of commands:
 
 Add the gitignore settings dotfile to the local gitconfigs:
 
-* `$ git config --global core.excludesfile ~/.dotfiles/gitignore_global`
+* `$ git config --global core.excludesfile ~/dotfiles/gitignore_global`
 
 Add the git aliases to the local gitconfigs:
 
-* `$ git config --global include.path ~/.dotfiles/gitconfig`
+* `$ git config --global include.path ~/dotfiles/gitconfig`
 
 ---
 

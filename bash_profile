@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # include bash_zsh_common if it exists
-if [ -f ~/.dotfiles/bash_zsh_common ]; then
-   . ~/.dotfiles/bash_zsh_common
+if [ -f ~/dotfiles/bash_zsh_common ]; then
+   . ~/dotfiles/bash_zsh_common
 fi
 
 # Git branch in prompt.
@@ -30,10 +30,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # load nvm bash_completion
 
 ##### scripts
-source ~/.dotfiles/scripts/git-completion.bash
+source ~/dotfiles/scripts/git-completion.bash
 
 # the z dir completion helper
-. ~/.dotfiles/scripts/z/z.sh
+. ~/dotfiles/scripts/z/z.sh
 export VOLTA_HOME="/Users/mvillene/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
