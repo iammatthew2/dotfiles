@@ -1,6 +1,3 @@
 [submodule "vim-configs"]
 	path = vim-configs
 	url = https://github.com/iammatthew2/vim-configs
-[submodule "scripts/z"]
-	path = scripts/z
-	url = https://github.com/rupa/z.git

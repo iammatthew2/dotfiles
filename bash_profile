@@ -33,7 +33,8 @@ export NVM_DIR="$HOME/.nvm"
 source ~/dotfiles/scripts/git-completion.bash
 
 # the z dir completion helper
-. ~/dotfiles/scripts/z/z.sh
+. ~/dotfiles/scripts/z.sh
+
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
