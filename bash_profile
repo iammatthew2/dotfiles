@@ -12,9 +12,12 @@ parse_git_branch() {
 
 if [ "$(uname)" == "Darwin" ]; then
   export PS1='\[\e[1;32m\]\h\[\e[m\]\[\e[1;30m\]\w\[\e[m\]\[\e[1;35m\]$(parse_git_branch)\[\e[m\]\[\e[1;32m\]$\[\e[m\] '
-else
+elif [ -z "$RDEV_NAME" ]; then
   export PS1='\[\e[1;33m\]\h@\w${text}$\[\e[m\] '
+else
+  export PS1='\[\e[1;33m\]$RDEV_NAME@\w${text}$\[\e[m\] '
 fi
+
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export CLICOLOR=1
 
