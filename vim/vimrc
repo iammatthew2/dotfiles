@@ -16,6 +16,9 @@ set expandtab
 set noshiftround
 set backspace=indent,eol,start
 
+" add underline for when in insert mode
+:autocmd InsertEnter,InsertLeave * set cul!
+
 
 " ***************************************************
 " How to use this vim configuration:
@@ -111,14 +114,13 @@ nmap <leader>o :set paste!<CR>
 nnoremap <leader>x :call NumberToggle()<CR>
 
 " Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers=['eslint'] " remember: must `$ eslint --init` in order to setup eslint for a new project
-
-" Airline settings
-set laststatus=2
+" DISABLED since current repo does not support
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers=['eslint'] " remember: must `$ eslint --init` in order to setup eslint for a new project
+"let g:syntastic_javascript_eslint_exe = 'npm run lint --'

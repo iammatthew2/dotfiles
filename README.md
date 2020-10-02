@@ -11,23 +11,18 @@ These dotfiles support:
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [git](https://git-scm.com/docs/git-config)
 
----
-
 ## Setup
 
 These dot files can be installed with with the included install script or manually
 
 * Running the install script:
-  * Clone the repo: `$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
+  * Clone the repo: `$ git clone https://github.com/iammatthew2/dotfiles.git`
   * Install: `$ cd dotfiles && . install.sh`
 
 * Manual install:
-  * Clone the repo: `$ git clone --recursive https://github.com/iammatthew2/dotfiles.git`
+  * Clone the repo: `$ git clone https://github.com/iammatthew2/dotfiles.git`
   * Create symlinks (see below)
   * Config changes to local .gitconfig settings (see below)
-
-
----
 
 ### Create symlinks
 
@@ -38,8 +33,7 @@ Run the following commands to add each of the symlinks:
 * `$ ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf`
 * `$ ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc`
 * `$ ln -sf ~/dotfiles/vim ~/.vim`
-* `$ ln -sf ~/dotfiles/vim-configs/vimrc ~/.vimrc`
-* `$ ln -sf ~/dotfiles/zshrc ~/.zshrc`
+* `$ ln -sf ~/dotfiles/vim/vimrc ~/.vimrc`
 
 ### Add dotfile configs to your local .gitconfig
 
@@ -51,18 +45,3 @@ Add the git aliases to the local gitconfigs:
 
 * `$ git config --global include.path ~/dotfiles/gitconfig`
 
----
-
-## Notes on working with git submodules
-
-On first install these notes below can be disregarded since we pull in the submodules in this repository via the `--recursive ` in the `git clone` command above. However, if/when this repository is updated with a new submodule (perhaps a vim module is added) or you add your own, then you would need to manually add the submodule as described below.
-
-### Adding a new submodule
-
-`$ git submdule add <gitPathHere> parentDirectory`
-
-Example: `$ git submodule add https://github.com/rupa/z.git scripts/z `
-
-### Doing a git pull and receiving a new submodule? You will need to init it
-
-`$ git submodule update --init local/path/to/submodule/folder`
