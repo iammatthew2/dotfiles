@@ -49,6 +49,19 @@ toggleHost() {
   fi
 }
 
+##connect to an rdev host with vscode then ssh into the host
+connect() {
+  if [ -z $1 ]
+    then echo "name of host must be given as an argument to this function"
+  else
+    echo "Connecting to host: $1"
+    echo "starting VS Code..."
+    rdev code $1
+    echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
+    ssh -t $1 "cd ${1%%/*}; bash -l"
+  fi
+}
+
 ##get server ip address via ssh cmd
 getServerIp() {
   if [ -z $SERVER_BOX ]
