@@ -6,13 +6,17 @@ if [ -f ~/.secrets/bash_private ]; then
    . ~/.secrets/bash_private
 fi
 
+# include rdev_helpers if it exists
+if [ -f ~/dotfiles/rdev_bash_helpers ]; then
+   . ~/dotfiles/rdev_bash_helpers
+fi
+
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ##### methods
 ##call gitFind with an argument to search for in addition to your user name
 gitFind() {
-  if [ ! -z $1 ]
-  then
+  if [ ! -z $1 ]; then
     git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i "${2-$(git config user.name)}" | grep -i "$1" | head -n 55
   else
     echo "one or two arguments required: gitFind <query> or gitFind <query1> <query2>/n
@@ -49,55 +53,13 @@ toggleHost() {
   fi
 }
 
-xdev() {
-  if [ "$1" == "create" ]; then
-    echo "custom rdev create wrapper"
-    $command rdev $@
-    $command xdev "refresh"
-  elif [ "$1" == "delete" ]; then
-    echo "custom rdev delete wrapper"
-    $command rdev $0
-    $command rdev refresh
-  elif [ "$1" == "refresh" ]; then
-    echo "custom rdev function to repopulate the .rdevLsCache"
-    echo "old cache:"
-    $command cat ~/.rdevLsCache
-    $command rdev ls > ~/.rdevLsCache
-    echo "new cache:"
-    $command cat ~/.rdevLsCache
-  else
-    rdev $@
-  fi
-}
-
-##filter rdev results and call connect()
-fconnect() {
-  connect $(cat ~/.rdevLsCache | grep RUNNING | fzf )
-}
-
-
-##connect to an rdev host with vscode then ssh into the host
-connect() {
-  if [ -z $1 ]; then
-    echo "name of host must be given as an argument to this function"
-  else
-    echo "Connecting to host: $1"
-    echo "starting VS Code..."
-    rdev code $1
-    echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
-    ssh -t $1 "cd ${1%%/*}; bash -l"
-  fi
-}
-
 ##get server ip address via ssh cmd
 getServerIp() {
-  if [ -z $SERVER_BOX ]
-  then echo "Expected var $SERVER_BOX to be set for this utility. Please add this to your bash config."
+  if [ -z $SERVER_BOX ]; then echo "Expected var $SERVER_BOX to be set for this utility. Please add this to your bash config."
   else
     echo "server ip: $(ssh $SERVER_BOX "hostname -I" | awk '{print $1}' FS=" ")"
   fi
-  if [ -z $SERVER_BOX_@ ]
-  then echo "Can add  var $SERVER_BOX_2 to be set for this utility."
+  if [ -z $SERVER_BOX_@ ]; then echo "Can add  var $SERVER_BOX_2 to be set for this utility."
   else
     echo "server_2 ip: $(ssh $SERVER_BOX_2 "hostname -I" | awk '{print $1}' FS=" ")"
   fi
