@@ -13,7 +13,7 @@ These dotfiles support:
 These dot files can be installed with with the included install script or manually
 
 * Running the install script:
-  * Clone the repo: `$ git clone https://github.com/iammatthew2/dotfiles.git`
+  * Clone this repo
   * Install: `$ cd dotfiles && . install.sh`
 
 * Manual install:
