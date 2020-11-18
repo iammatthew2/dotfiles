@@ -17,7 +17,7 @@ These dot files can be installed with with the included install script or manual
   * Install: `$ cd dotfiles && . install.sh`
 
 * Manual install:
-  * Clone the repo: `$ git clone https://github.com/iammatthew2/dotfiles.git`
+  * Clone this repo
   * Create symlinks (see below)
   * Config changes to local .gitconfig settings (see below)
 
