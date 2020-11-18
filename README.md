@@ -1,8 +1,5 @@
 # Dotfiles: a set of public configs
 
-This repository makes use of git sub-modules to pull in a few other repositories:
-vim configs, vim modules and bash scripts
-
 These dotfiles support:
 
 * [bash](https://www.gnu.org/software/bash/)
