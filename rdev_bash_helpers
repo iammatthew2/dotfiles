@@ -38,7 +38,7 @@ fconnect() {
     echo "fzf could not be found. Maybe it's not installed?"
   else
     confirmRdevCache
-    connect $(cat ~/.rdevLsCache | grep RUNNING | fzf )
+    connect $(cat ~/.rdevLsCache | grep RUNNING | awk '{print $1}' | fzf ) ${1}
   fi
 }
 
@@ -46,10 +46,18 @@ fconnect() {
 # Connect to an rdev host with vscode then ssh into the host
 # Arguments:
 #   host: name of rdev host to connect to
+#   flag: "-c" or "-s" to only trigger vs code or start the basic session
 #######################################
 connect() {
   if [ -z $1 ]; then
     echo "name of host must be given as the one and only argument to this function"
+  elif [ "-c" == $2 ]; then
+    echo "Connecting to host: $1"
+    echo "starting VS Code..."
+    rdev code $1
+  elif [ "-s" == $2 ]; then
+    echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
+    ssh -t $1 "cd ${1%%/*}; bash -l"
   else
     echo "Connecting to host: $1"
     echo "starting VS Code..."
