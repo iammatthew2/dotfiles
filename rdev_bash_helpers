@@ -13,7 +13,7 @@ xdev() {
   elif [ "$1" == "delete" ]; then
     echo "rdev delete wrapper"
     rdev $0
-    rdev refresh
+    xdev refresh
   elif [ "$1" == "refresh" ]; then
     confirmRdevCache
     rdev ls > ~/.rdevLsCache
