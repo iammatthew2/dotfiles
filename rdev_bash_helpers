@@ -31,7 +31,7 @@ xdev() {
 #######################################
 # Filter rdev results and call connect()
 # Arguments:
-# flag: (passed down to connect()) "-c" or "-s" - only open either VS Code or a basic session, respectively
+# flag: (passed down to connect()) "-c" or "-s" - only open either VS Code or a basic ssh session, respectively
 #######################################
 fconnect() {
   if ! command -v fzf &> /dev/null;  then
@@ -46,7 +46,7 @@ fconnect() {
 # Connect to an rdev host with vscode then ssh into the host
 # Arguments:
 #   host: name of rdev host to connect to
-#   flag: "-c" or "-s" - only open either VS Code or a basic session, respectively
+#   flag: "-c" or "-s" - only open either VS Code or a basic ssh session, respectively
 #######################################
 connect() {
   if [ -z $1 ]; then
