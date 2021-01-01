@@ -8,11 +8,11 @@
 xdev() {
   if [ "$1" == "create" ]; then
     echo "rdev create wrapper"
-    rdev $@
+    rdev create $2
     xdev refresh
   elif [ "$1" == "delete" ]; then
     echo "rdev delete wrapper"
-    rdev $0
+    rdev delete $2
     xdev refresh
   elif [ "$1" == "refresh" ]; then
     confirmRdevCache
@@ -36,6 +36,14 @@ xdev() {
 fconnect() {
   if ! command -v fzf &> /dev/null;  then
     echo "fzf could not be found. Maybe it's not installed?"
+  elif [ "-h" == $1 ]; then
+    echo "fconnect filters rdev results and call connect()"
+    echo
+    echo "Optional params:"
+    echo "-h help"
+    echo "-s establish a basic ssh session"
+    echo "-rs establish an rdev ssh session"
+    echo "-c  establish an rdev VS Code session"
   else
     confirmRdevCache
     # call connect() and pass it the result we select from the fzf selection menu along with any flags set
@@ -59,6 +67,9 @@ connect() {
   elif [ "-s" == $2 ]; then
     echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
     ssh -t $1 "cd ${1%%/*}; bash -l"
+  elif [ "-rs" ==  $2 ]; then
+    echo "starting an RDEV ssh session"
+    rdev ssh $1
   else
     echo "Connecting to host: $1"
     echo "starting VS Code..."
