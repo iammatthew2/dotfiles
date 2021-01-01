@@ -93,3 +93,9 @@ alias ll='ls -la'
 alias lll='ls -lha'
 alias notes='cd ~/Dropbox/notes/work'
 alias nox='vim ~/Dropbox/notes/work'
+
+# wip - not working right now. Revisit later
+#alias runHeadTests="ember exam --path dist --file-path $(git diff HEAD^ HEAD --name-only -- "*test*" | awk 'ORS=","' | sed 's/,$/\n/')"
+alias otherTest="git diff HEAD^ HEAD --name-only -- '*test*' | tr '\n' ',' | sed 's/.$//' | (read p1; ember exam --path dist --file-path "$p1")"
+alias tmp2="git diff HEAD^ HEAD --name-only -- '*test*' | tr '\n' ',' | sed 's/.$//' | (read p1; echo ember exam --path dist --file=path $p1)"
+alias tmp3="git diff HEAD^ HEAD --name-only -- '*test*' | tr '\n' ',' | sed 's/.$//' | xargs echo"
