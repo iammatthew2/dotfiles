@@ -1,16 +1,16 @@
 [alias]
-	co = checkout
-	ci = commit
-	st = status -s
+  co = checkout
+  ci = commit
+  st = status -s
   ca = commit --amend --no-edit
-	br = branch
-	com = checkout master
+  br = branch
+  com = checkout master
   dn = diff --name-only
   dh = diff HEAD^ HEAD
   dhn = diff HEAD^ HEAD --name-only
 
   # view remote and local branches
-	ba = branch -a
+  ba = branch -a
 
   # branches sorted by date
   brs= for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
