@@ -14,16 +14,6 @@ fi
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ##### methods
-##call gitFind with an argument to search for in addition to your user name
-gitFind() {
-  if [ ! -z $1 ]; then
-    git log --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' | grep -i "${2-$(git config user.name)}" | grep -i "$1" | head -n 55
-  else
-    echo "one or two arguments required: gitFind <query> or gitFind <query1> <query2>/n
-    If only one argument, second argument is defaulted to git config user.name'"
-  fi
-}
-
 ##get info on port 9000 or some other specified port
 port() {
   echo "Running lsof -n -iTCP: on ports 9000 thru 9005 and 9999, 4443, 4200"

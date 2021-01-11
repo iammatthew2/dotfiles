@@ -2,20 +2,31 @@
 	co = checkout
 	ci = commit
 	st = status -s
+  ca = commit --amend --no-edit
 	br = branch
-	ba = branch -a
-  brs= for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
 	com = checkout master
   dn = diff --name-only
   dh = diff HEAD^ HEAD
   dhn = diff HEAD^ HEAD --name-only
+
+  # view remote and local branches
+	ba = branch -a
+
+  # branches sorted by date
+  brs= for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads
+
+  # search HEAD files for a file
   dhs = "!git diff HEAD^ HEAD $(git diff HEAD^ HEAD --name-only | fzf --height 20% --reverse)"
+
+  # search unstaged files for a file
   ds = "!git diff $(git status -s | awk '{print $2}' | fzf --height 20% --reverse)"
+
+  # search commit logs for a keyword and author (defaults to current user)
+  find = "!f(){ git log -50 -i --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' --grep \"$1\" --author \"${2-$(git config user.name)}\"; };f"
+
+  # simplified logs
   lg = log --graph --pretty=format:'%C(red black)%h%Creset -%C(yellow black)%d%Creset %<(50,trunc)%s %C(green black)(%cr) %Cresetby: %C(yellow black)%an' -n 15
-  lm = log --format=%B -n 1
-  sh = show --oneline --name-only
-  df = ! git dn | grep -i
-  ca = commit --amend --no-edit
+
 [color]
 	diff = auto
 	status = auto
