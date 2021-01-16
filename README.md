@@ -7,6 +7,7 @@ These dotfiles support:
 * [tmux](https://github.com/tmux/tmux)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [git](https://git-scm.com/docs/git-config)
+* [watchman-processor](https://github.com/markis/watchman-processor)
 
 ## Setup
 
@@ -31,6 +32,7 @@ Run the following commands to add each of the symlinks:
 * `$ ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc`
 * `$ ln -sf ~/dotfiles/vim ~/.vim`
 * `$ ln -sf ~/dotfiles/vim/vimrc ~/.vimrc`
+* `$ ln -sf ~/dotfiles//watchman-processor.config ~/.watchman-processor.config.js`
 
 ### Add dotfile configs to your local .gitconfig
 

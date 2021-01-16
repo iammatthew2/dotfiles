@@ -8,6 +8,7 @@
   dn = diff --name-only
   dh = diff HEAD^ HEAD
   dhn = diff HEAD^ HEAD --name-only
+  sh = show --oneline --name-only
 
   # view remote and local branches
   ba = branch -a
