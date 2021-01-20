@@ -8,7 +8,15 @@
 xdev() {
   if [ "$1" == "create" ]; then
     echo "rdev create wrapper"
-    rdev create $2
+    if [ -z $2 ];then
+      echo "no product supplied. Using cache from ~/.rdevLastCreateCache"
+      product=$(<~/.rdevLastCreateCache)
+    else
+      echo "$2" > ~/.rdevLastCreateCache
+      product=$2
+    fi
+    echo "creating rdev instance for product ${product}"
+    rdev create ${product}
     xdev refresh
   elif [ "$1" == "delete" ]; then
     echo "rdev delete wrapper"
