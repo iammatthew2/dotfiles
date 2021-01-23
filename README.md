@@ -32,7 +32,7 @@ Run the following commands to add each of the symlinks:
 * `$ ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc`
 * `$ ln -sf ~/dotfiles/vim ~/.vim`
 * `$ ln -sf ~/dotfiles/vim/vimrc ~/.vimrc`
-* `$ ln -sf ~/dotfiles//watchman-processor.config ~/.watchman-processor.config.js`
+* `$ ln -sf ~/dotfiles/watchman-processor.config.js ~/.watchman-processor.config.js`
 
 ### Add dotfile configs to your local .gitconfig
 

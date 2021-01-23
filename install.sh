@@ -8,7 +8,7 @@ ln -sf ${BASEDIR}/ripgreprc ~/.ripgreprc
 ln -sf ${BASEDIR}/vim ~/.vim
 ln -sf ${BASEDIR}/vim/vimrc ~/.vimrc
 ln -sf ${BASEDIR}/zshrc ~/.zshrc
-ln -sf ${BASEDIR}/watchman-processor.config ~/.watchman-processor.config.js
+ln -sf ${BASEDIR}/watchman-processor.config.js ~/.watchman-processor.config.js
 
 #Add the gitignore settings dotfile to the local gitconfigs:
 git config --global core.excludesfile ${BASEDIR}/gitignore_global
