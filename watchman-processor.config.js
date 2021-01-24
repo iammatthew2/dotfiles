@@ -70,8 +70,7 @@ SUBS.forEach((productName) => {
   // check if the product requires the SUFFIX
   const useSuffix = !!suffix && fs.existsSync(`${BASE_DIR}/${productName}${SUFFIX}/`);
   const productDir = useSuffix ? `${BASE_DIR}/${productName}${SUFFIX}/` : `${BASE_DIR}/${productName}/`;
-
-  if (!useSuffix && fs.existsSync(`${BASE_DIR}/${productName}/`)) {
+  if (!fs.existsSync(`${BASE_DIR}/${productName}/`)) {
     console.log(`path not valid for ${productName} at ${BASE_DIR}/${productName}${SUFFIX} or ${BASE_DIR}/${productName}`);
     process.exit();
   } 

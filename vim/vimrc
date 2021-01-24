@@ -1,9 +1,7 @@
 filetype plugin indent on
-
+syntax on
 set visualbell
 set number relativenumber
-syntax on
-set background=dark
 set ruler
 set encoding=utf-8
 set textwidth=79
@@ -15,63 +13,71 @@ set softtabstop=2
 set expandtab
 set noshiftround
 set backspace=indent,eol,start
-
-" add underline for when in insert mode
-:autocmd InsertEnter,InsertLeave * set cul!
-
-
-" ***************************************************
-" How to use this vim configuration:
-" ***************************************************
-" Leader: not modified: \
-" Edit this vimrc: <leader>ev
-" File search for text under cursor: <leader>g
-" Fuzzy file find with ctrlp: <C-p> and to reduce search scope, add file .ctrlpMarker to top-level scope of project
-" File Search :Ggrep someSearchParam
-" Go to previous file edited in buffer: <leader>b
-" Toggle syntastic errors view: `:lop` and `lcl` to close the location list
-" Toggle line numbering styles: <leader>l
-" Toggle quickfix window: <leader>q
-" Toggle NERDTree: <leader>e
-
-" Commands to master:
-"**************************************
-" :b fileName  - open file from buffer
-" :b# - go to previous open file
-" ctrl-z - suspend vim (access the suspended job with 'fg', view jobs with 'jobs' )
-" ***************************************************
-" Navigation settings: file tree, window splitting
-" ***************************************************
-" Edit this config
-nmap <leader>ev :vsp $MYVIMRC<CR>
-
-" Go back to previous filed edited in buffer
-nmap <leader>b :b#<CR>
-
-" Open/close nerdtree
-nmap <leader>e :NERDTreeToggle<CR>
-
-" Open current file in Chome
-nmap <leader>c :exec ':!open % -a Google\ Chrome'<CR>
-
-" ***************************************************
-" Finding/Searching and Quicklist settings
-" ***************************************************
 set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+hi Search cterm=NONE ctermfg=grey ctermbg=blue
+
+" add underline for when in insert mode
+:autocmd InsertEnter,InsertLeave * set cul!
+
+" Key-mappings:
+" ***************************************************
+" Toggle NERDTree: <leader>t
+nmap <leader>t :NERDTreeToggle<CR>
+" Toggle line numbering styles: regular, relative, relative plus, none
+nmap <leader>l :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
+" Edit this config
+nmap <leader>e :vsp $MYVIMRC<CR>
+" Go to previous file edited in buffer
+nmap <leader>b :b#<CR>
 " Clear search highlighting
 nnoremap <silent> <leader>\ :nohlsearch <cr>
-
-" Git grepping with fugitive
-:nnoremap <leader>g :silent execute "Ggrep " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
-
-" Quicklist mappings:
+" Toggle quickfix window: <leader>q
+:nnoremap <leader>q :call QuickfixToggle()<cr>
+" Quicklist navigation
 :map <C-j> :cn<CR>
 :map <C-k> :cp<CR>
+" FZF: file find
+nnoremap <silent> <C-f> :Files<CR> 
+" FZF: ripgrep -> FZF phrase find
+nnoremap <silent> <Leader>f :Rg<CR>
+" FZF: git commit search
+nnoremap <silent> <Leader>g :Commits<CR>
 
-:nnoremap <leader>q :call QuickfixToggle()<cr>
+
+" ***************************************************
+" Notes on how to do common actions
+" ***************************************************
+
+" NERDTree commands:
+" t: Open the selected file in a new tab
+" i: Open the selected file in a horizontal split window
+" s: Open the selected file in a vertical split window
+" I: Toggle hidden files
+" m: Show the NERD Tree menu
+" R: Refresh the tree, useful if files change outside of Vim
+" ?: Toggle NERD Tree's quick help
+"
+" How to tab:
+" ***************************************************
+" next tab: gt
+" prior tab: gT
+" numbered tab: nnngt
+"
+" More:
+" ***************************************************
+" ctrl - ww: navigate across split views (NerdTree is considered one of those views)
+" :b fileName  - open file from buffer
+" :b# - go to previous open file
+" ctrl-z - suspend vim (access the suspended job with 'fg', view jobs with 'jobs' )
+
+" ***************************************************
+" Helper methods and other configs beyond simple `set`s and basic key mappings
+" ***************************************************
+
+" Quicklist toggle helper 
 let g:quickfix_is_open = 0
 function! QuickfixToggle()
     if g:quickfix_is_open
@@ -85,42 +91,15 @@ function! QuickfixToggle()
     endif
 endfunction
 
-" bind K to grep word under cursor
 
-"set noremap K :silent grep! "\b\s?<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" CtrlP setting:
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-"ctrlp setting to set the top level dir that we'll search in. Bypass with ..
-let g:ctrlp_root_markers = ['.ctrlpMarker']
-
+" FZF configs
 " ***************************************************
-" Presentation/Style settings
-" ***************************************************
+" https://github.com/junegunn/fzf.vim
+" https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
+packadd! fzf
+packadd! fzf.vim
+set rtp+=/usr/local/opt/fzf
+" config FZF to exclude file names from file name from the phrase match search (ripgrep)
+" since we are searching for file name via <C-f>
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
-" toggle line numbers: regular, relative, relative plus, none
-nmap <leader>l :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
-nmap <leader>o :set paste!<CR>
-nnoremap <leader>x :call NumberToggle()<CR>
-
-" Syntastic settings
-" DISABLED since current repo does not support
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers=['eslint'] " remember: must `$ eslint --init` in order to setup eslint for a new project
-"let g:syntastic_javascript_eslint_exe = 'npm run lint --'

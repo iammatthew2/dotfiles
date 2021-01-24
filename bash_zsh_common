@@ -66,14 +66,14 @@ rg() {
 
 ##### aliases
 alias vim='vi'
-alias evim='vim ~/.vim/vimrc'
-alias egit='vim ~/.dotfiles/gitconfig'
+alias evim='vim ~/dotfiles/vim/vimrc'
+alias egit='vim ~/dotfiles/gitconfig'
 alias etmux='vim ~/.tmux.conf'
 alias rzsh='. ~/.zshrc'
 alias ezsh='vim ~/.zshrc'
 alias rbash='. ~/.bash_profile'
 alias ebash='vim ~/.bash_profile'
-alias ebashz='vim ~/.dotfiles/bash_zsh_common'
+alias ebashz='vim ~/dotfiles/bash_zsh_common'
 alias erip='vim ~/.ripgreprc'
 alias ewatch='vim ~/.watchman-processor.config.js'
 alias code='code .'

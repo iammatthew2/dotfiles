@@ -7,8 +7,10 @@
 #######################################
 xdev() {
   if [ "$1" == "create" ]; then
-    echo "rdev create wrapper"
-    if [ -z $2 ];then
+    echo "This will create a new rdev instance"
+    echo "........................."
+    echo ""
+    if [[ -z $2 ]];then
       echo "no product supplied. Using cache from ~/.rdevLastCreateCache"
       product=$(<~/.rdevLastCreateCache)
     else
@@ -16,8 +18,18 @@ xdev() {
       product=$2
     fi
     echo "creating rdev instance for product ${product}"
-    rdev create ${product}
-    xdev refresh
+     rdev create ${product} > ~/.rdevLatestCreateResponse
+    echo "created:"
+    cat ~/.rdevLatestCreateResponse
+    echo "........................."
+     xdev refresh
+    # TODO: update this to handle flags
+    if [[ true ]]; then
+      echo "The <connect> flag was passed"
+      echo "so this script will now call connect() with the new instance name"
+      echo "which will open VS Code and a new ssh connection to that instance"
+      connect $(cat ~/.rdevLatestCreateResponse | grep RUNNING | awk '{print $1}') 
+    fi
   elif [ "$1" == "delete" ]; then
     echo "rdev delete wrapper"
     rdev delete $2
