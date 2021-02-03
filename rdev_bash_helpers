@@ -30,6 +30,11 @@ xdev() {
       echo "which will open VS Code and a new ssh connection to that instance"
       connect $(cat ~/.rdevLatestCreateResponse | grep RUNNING | awk '{print $1}') 
     fi
+    # untested
+    #if [[ true ]]; then 
+      #echo "running pembery-secure"
+      # yarn pemberly-secure trust voyager-web/$(product | grep RUNNING | awk 'print $1') --use-localhost-for-remote --allow-unsafe-host
+    #fi
   elif [ "$1" == "delete" ]; then
     echo "rdev delete wrapper"
     rdev delete $2
@@ -67,7 +72,7 @@ fconnect() {
   else
     confirmRdevCache
     # call connect() and pass it the result we select from the fzf selection menu along with any flags set
-    connect $(cat ~/.rdevLsCache | grep RUNNING | awk '{print $1}' | fzf ) ${1}
+    connect $(cat ~/.rdevLsCache | grep RUNNING | awk '{print $1}' | fzf --height 25%) ${1}
   fi
 }
 

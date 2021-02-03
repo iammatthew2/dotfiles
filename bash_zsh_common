@@ -43,18 +43,6 @@ toggleHost() {
   fi
 }
 
-##get server ip address via ssh cmd
-getServerIp() {
-  if [ -z $SERVER_BOX ]; then echo "Expected var $SERVER_BOX to be set for this utility. Please add this to your bash config."
-  else
-    echo "server ip: $(ssh $SERVER_BOX "hostname -I" | awk '{print $1}' FS=" ")"
-  fi
-  if [ -z $SERVER_BOX_@ ]; then echo "Can add  var $SERVER_BOX_2 to be set for this utility."
-  else
-    echo "server_2 ip: $(ssh $SERVER_BOX_2 "hostname -I" | awk '{print $1}' FS=" ")"
-  fi
-}
-
 #alias rgi="rg --type-add 'web:*.{html,css,scss,hbs,tl,js}' --type-add 'scss:*.scss' --type-add 'test:*{test,Test,TEST}*'" 
 rg() {
     if [ -t 1 ]; then
@@ -65,7 +53,6 @@ rg() {
 }
 
 ##### aliases
-alias vim='vi'
 alias evim='vim ~/dotfiles/vim/vimrc'
 alias egit='vim ~/dotfiles/gitconfig'
 alias etmux='vim ~/.tmux.conf'
@@ -81,8 +68,6 @@ alias ..='cd ..'
 alias l='ls -l'
 alias ll='ls -la'
 alias lll='ls -lha'
-alias notes='cd ~/Dropbox/notes/work'
-alias nox='vim ~/Dropbox/notes/work'
 
 # wip - not working right now. Revisit later
 #alias runHeadTests="ember exam --path dist --file-path $(git diff HEAD^ HEAD --name-only -- "*test*" | awk 'ORS=","' | sed 's/,$/\n/')"

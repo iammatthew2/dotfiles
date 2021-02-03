@@ -84,7 +84,7 @@ SUBS.forEach((productName) => {
 });
 
 module.exports = {
-  debug: true,
+  debug: false,
   emoji: true,
   controlWatchman: true,
   rsyncCmd: 'rsync',
