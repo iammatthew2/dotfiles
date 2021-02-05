@@ -1,0 +1,66 @@
+#!/bin/bash
+
+#######################################
+# Run ember exam against a set of files
+# Flags:
+# -c: (default) run test files from git unstaged changes, i.e., test files you seen in 'git status'
+# -d: run test files in from git head
+# -h: help
+# files[,files]: run supplied test files
+#######################################
+emberTests() {
+  gitHead_flag=''
+  gitChanges_flag=''
+  help_flag=''
+  listOfTestFiles=''
+  finalTestFiles=''
+
+  # handle a set of command flags
+  unset opt OPTARG OPTIND
+  while getopts 'cdh' flag; do
+    case "${flag}" in
+      c ) gitChanges_flag='true' ;;
+      d ) gitHead_flag='true' ;;
+      h ) help_flag='true' ;;
+    esac
+  done
+
+  # determine which (if any) test files we're going to run
+  if [[ -z "$1" ]]; then
+    # default to '-c' param
+    emberTests -c
+  elif [[ "$gitChanges_flag" == "true" ]]; then
+    echo "Testing files in git status:"
+    listOfTestFiles=$(git status --porcelain | sed s/^...// | grep test)
+    echo "$listOfTestFiles"
+    finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//')
+  elif [[ "$gitHead_flag" == "true" ]]; then
+    echo "Testing files in git HEAD:"
+    listOfTestFiles=$(git diff HEAD^ HEAD --name-only -- '*test*')
+    echo "$listOfTestFiles"
+    finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//' | xargs echo)
+  elif [[ "$help_flag" == "true" ]]; then
+    echo "emberTests is a helper for plugging a set of test files into 'ember exam --path dist --file-path'"
+    echo ""
+    echo "Usage:"
+    echo "* emberTest: default (same as emberTest -c): run test files from git unstaged changes, i.e., test files you seen in 'git status'"
+    echo "* emberTest -d: run test files from files in git head"
+    echo "* emberTest \"filePath[,otherFilePath]"
+  elif [[ $1 == -* ]]; then
+    # looks like a param was passed that was not caught here
+    echo "Unrecognized parameter. Trying running the command with the help (-h) flag"
+  else
+    echo "Assuming you've passed in a file/files"
+    echo "Passing the following to ember exam:"
+    finalTestFiles=$1
+    echo $finalTestFiles
+  fi
+
+  # exit early since there are no files to test and we'll wait forever if this gets passed to ember exam
+  if [[ -z "$finalTestFiles" ]]; then
+    return 1
+  fi
+
+  # run the tests
+  ember exam --path dist --file-path ${finalTestFiles}
+}
