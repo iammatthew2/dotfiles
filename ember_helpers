@@ -14,21 +14,24 @@ emberTests() {
   help_flag=''
   listOfTestFiles=''
   finalTestFiles=''
+  filter=''
 
   # handle a set of command flags
   unset opt OPTARG OPTIND
-  while getopts 'cdh' flag; do
+  while getopts 'cdf:h' flag; do
     case "${flag}" in
-      c ) gitChanges_flag='true' ;;
-      d ) gitHead_flag='true' ;;
-      h ) help_flag='true' ;;
+      c ) gitChanges_flag="true" ;;
+      d ) gitHead_flag="true" ;;
+      f ) filter="${OPTARG}" ;;
+      h ) help_flag="true" ;;
     esac
   done
 
   # determine which (if any) test files we're going to run
   if [[ -z "$1" ]]; then
-    # default to '-c' param
+    # default to '-c' param if no arguments passed in
     emberTests -c
+    return 1
   elif [[ "$gitChanges_flag" == "true" ]]; then
     echo "Testing files in git status:"
     listOfTestFiles=$(git status --porcelain | sed s/^...// | grep test)
@@ -43,9 +46,10 @@ emberTests() {
     echo "emberTests is a helper for plugging a set of test files into 'ember exam --path dist --file-path'"
     echo ""
     echo "Usage:"
-    echo "* emberTest: default (same as emberTest -c): run test files from git unstaged changes, i.e., test files you seen in 'git status'"
-    echo "* emberTest -d: run test files from files in git head"
-    echo "* emberTest \"filePath[,otherFilePath]"
+    echo "-c (default) - run test files from git unstaged changes (see 'git status')"
+    echo "-d - run test files from files in git head"
+    echo "\"filePath[,otherFilePath]\" - file paths of tests to run"
+    echo "-f \"filter string\": filter to apply to limit tests in supplied file set"
   elif [[ $1 == -* ]]; then
     # looks like a param was passed that was not caught here
     echo "Unrecognized parameter. Trying running the command with the help (-h) flag"
@@ -62,5 +66,9 @@ emberTests() {
   fi
 
   # run the tests
-  ember exam --path dist --file-path ${finalTestFiles}
+  if [[ -z "$filter" ]]; then
+    ember exam --path dist --file-path ${finalTestFiles}
+  else
+    ember exam --path dist --file-path ${finalTestFiles} --filter ${filter}
+  fi
 }
