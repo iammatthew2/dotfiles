@@ -38,8 +38,8 @@ source ~/dotfiles/scripts/git-completion.bash
 # the z dir completion helper
 . ~/dotfiles/scripts/z.sh
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

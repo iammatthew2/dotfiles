@@ -69,6 +69,9 @@ emberTests() {
   if [[ -z "$filter" ]]; then
     ember exam --path dist --file-path ${finalTestFiles}
   else
+    echo ""
+    echo "Filtering for: ${filter}"
+    echo ""
     ember exam --path dist --file-path ${finalTestFiles} --filter ${filter}
   fi
 }
