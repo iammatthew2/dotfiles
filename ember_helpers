@@ -15,15 +15,17 @@ emberTests() {
   listOfTestFiles=''
   finalTestFiles=''
   filter=''
+  server_flag=''
 
   # handle a set of command flags
   unset opt OPTARG OPTIND
-  while getopts 'cdf:h' flag; do
+  while getopts 'cdf:hs' flag; do
     case "${flag}" in
       c ) gitChanges_flag="true" ;;
       d ) gitHead_flag="true" ;;
       f ) filter="${OPTARG}" ;;
       h ) help_flag="true" ;;
+      s ) server_flag="--server" ;;
     esac
   done
 
@@ -67,11 +69,11 @@ emberTests() {
 
   # run the tests
   if [[ -z "$filter" ]]; then
-    ember exam --path dist --file-path ${finalTestFiles}
+    ember exam --path dist --file-path ${finalTestFiles} ${server_flag}
   else
     echo ""
     echo "Filtering for: ${filter}"
     echo ""
-    ember exam --path dist --file-path ${finalTestFiles} --filter ${filter}
+    ember exam --path dist --file-path ${finalTestFiles} --filter ${filter} ${server_flag}
   fi
 }
