@@ -43,4 +43,3 @@ Add the gitignore settings dotfile to the local gitconfigs:
 Add the git aliases to the local gitconfigs:
 
 * `$ git config --global include.path ~/dotfiles/gitconfig`
-

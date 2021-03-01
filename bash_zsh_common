@@ -1,9 +1,12 @@
 #!/bin/bash
 
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
 
-# include bash_private if it exists
-if [ -f ~/.secrets/bash_private ]; then
-   . ~/.secrets/bash_private
+# update the PATH for remote dev instances
+if [ "$(uname)" == "Linux" ]; then
+  export PATH=$PATH:~/dotfiles/bin
 fi
 
 # include rdev_helpers if it exists
@@ -34,7 +37,6 @@ port() {
 
 ##toggle the host file from local, server1, server2 
 toggleHost() {
-  echo "Get server IP with: getServerIp"
   read -r line < /etc/hosts
   if [[ $line = *"local"* ]]; then
     echo "Toggling the host file from local to server1"
