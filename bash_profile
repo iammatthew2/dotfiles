@@ -1,4 +1,8 @@
 #!/bin/bash
+# include bash_zsh_common if it exists
+if [ -f ~/dotfiles/bash_zsh_common ]; then
+   . ~/dotfiles/bash_zsh_common
+fi
 
 # Git branch in prompt.
 parse_git_branch() {
