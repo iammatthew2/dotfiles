@@ -25,7 +25,7 @@ hi Search cterm=NONE ctermfg=grey ctermbg=blue
 " Key-mappings:
 " ***************************************************
 " Toggle NERDTree: <leader>t
-nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>t :NERDTreeFind<CR>
 " Toggle line numbering styles: regular, relative, relative plus, none
 nmap <leader>l :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 " Edit this config
