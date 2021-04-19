@@ -4,17 +4,12 @@ if [ -f ~/dotfiles/bash_zsh_common ]; then
    . ~/dotfiles/bash_zsh_common
 fi
 
-# Git branch in prompt.
-parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
-}
-
 if [ "$(uname)" == "Darwin" ]; then
-  export PS1='\[\e[1;32m\]\h\[\e[m\]\[\e[1;30m\]\w\[\e[m\]\[\e[1;35m\]$(parse_git_branch)\[\e[m\]\[\e[1;32m\]$\[\e[m\] '
+  export PS1='\[\e[1;32m\]\h\[\e[m\]\[\e[1;30m\]\w\[\e[m\]\[\e[1;35m\]$\[\e[m\]\[\e[1;32m\]\[\e[m\] '
 elif [ -z "$RDEV_NAME" ]; then
-  export PS1='\[\e[1;33m\]\h@\w${text}$\[\e[m\] '
+  export PS1='\[\e[1;33m\]\h@\w$\[\e[m\] '
 else
-  export PS1='\[\e[1;33m\]$RDEV_NAME@\w${text}$\[\e[m\] '
+  export PS1='\[\e[1;33m\]$RDEV_NAME@\w$\[\e[m\] '
 fi
 
 export LSCOLORS=GxFxCxDxBxegedabagaced

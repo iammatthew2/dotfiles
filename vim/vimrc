@@ -19,8 +19,15 @@ set smartcase
 set hlsearch
 hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
-" add underline for when in insert mode
-:autocmd InsertEnter,InsertLeave * set cul!
+" style status line to indicate active pane
+hi StatusLine   ctermfg=15  guifg=#ffffff ctermbg=239 guibg=#4e4e4e cterm=bold gui=bold
+hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
+" underline current row for active pane
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set cul
+    autocmd WinLeave * set nocul
+augroup END
 
 " Key-mappings:
 " ***************************************************
@@ -42,10 +49,9 @@ nnoremap <silent> <leader>\ :nohlsearch <cr>
 " FZF: file find
 nnoremap <silent> <C-f> :Files<CR> 
 " FZF: ripgrep -> FZF phrase find
-nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <leader>f :Rg<CR>
 " FZF: git commit search
-nnoremap <silent> <Leader>g :Commits<CR>
-
+nnoremap <silent> <leader>g :Commits<CR>
 
 " ***************************************************
 " Notes on how to do common actions
@@ -102,4 +108,21 @@ set rtp+=/usr/local/opt/fzf
 " config FZF to exclude file names from file name from the phrase match search (ripgrep)
 " since we are searching for file name via <C-f>
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" source files from rg results
+if executable('rg')
+let $FZF_DEFAULT_COMMAND = 'rg --files'
+endif
+" testing...
+" this first one looks good for searching under cursor
+command! -bang -nargs=* PRg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(expand('<cword>')), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* PRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+command! -bang -nargs=* XRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+:nnoremap gr :grep <cword> *<CR>
+:nnoremap Gr :grep <cword> %:p:h/*<CR><CR>
+:nnoremap gR :grep '\b<cword>\b' *<CR>
+:nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
 
+
+nnoremap <silent><leader>w :Rg -q <C-R>=expand("<cword>")<CR><CR>
