@@ -61,6 +61,8 @@ nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>f :Rg<CR>
 " FZF: git commit search
 nnoremap <silent> <leader>g :Commits<CR>
+" FZF: git diff log HEAD -n <count> --name-only
+nnoremap <silent> <leader>h :HFiles
 
 " ***************************************************
 " Notes on how to do common actions
@@ -128,6 +130,9 @@ packadd! fzf.vim
 set rtp+=/usr/local/opt/fzf
 " config FZF to exclude file names from file name from the phrase match search (ripgrep)
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" Find files in git commits
+command! -count=1 HFiles call fzf#run(fzf#wrap(fzf#vim#with_preview({ 'source': 'git log HEAD -n <count> --diff-filter=MA --name-only --pretty=format: | sed -e /^$/d', 'window': {'width': 0.9, 'height': 0.6}})))
+
 " source files from rg results
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files'
