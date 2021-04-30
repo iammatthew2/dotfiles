@@ -21,6 +21,7 @@ set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+set directory=~/.vim/vimswap
 hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
 " Style status line to indicate active pane
