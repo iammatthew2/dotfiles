@@ -1,10 +1,5 @@
 " COC config taken from https://github.com/neoclide/coc.nvim
 
-
-let g:coc_global_extensions = [
-  \ 'coc-ember'
-\ ]
-
 " TextEdit might fail if hidden is not set.
 set hidden
 
