@@ -23,6 +23,7 @@ set smartcase
 set hlsearch
 set directory=~/.vim/vimswap
 hi Search cterm=NONE ctermfg=grey ctermbg=blue
+color slate
 
 " Style status line to indicate active pane
 hi StatusLine   ctermfg=15  guifg=#ffffff ctermbg=239 guibg=#4e4e4e cterm=bold gui=bold
@@ -138,3 +139,7 @@ command! -count=1 HFiles call fzf#run(fzf#wrap(fzf#vim#with_preview({ 'source': 
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files'
 endif
+
+" Air-line configs
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
