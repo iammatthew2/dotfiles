@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #######################################
 # Wrapper method for `rdev` to cache names of rdev instances
@@ -6,7 +6,7 @@
 #   same as native `rdev` commands
 #######################################
 xdev() {
-  if [ "$1" == "create" ]; then
+  if [[ "$1" == "create" ]]; then
     echo "This will create a new rdev instance"
     echo "........................."
     echo ""
@@ -35,16 +35,16 @@ xdev() {
       #echo "running pembery-secure"
       # yarn pemberly-secure trust voyager-web/$(product | grep RUNNING | awk 'print $1') --use-localhost-for-remote --allow-unsafe-host
     #fi
-  elif [ "$1" == "delete" ]; then
+  elif [[ "$1" == "delete" ]]; then
     echo "rdev delete wrapper"
     rdev delete $2
     xdev refresh
-  elif [ "$1" == "refresh" ]; then
+  elif [[ "$1" == "refresh" ]]; then
     confirmRdevCache
     rdev ls > ~/.rdevLsCache
     echo "New cache is set as:"
     cat ~/.rdevLsCache
-  elif [ "$1" == "ls" ]; then
+  elif [[ "$1" == "ls" ]]; then
     confirmRdevCache
     echo "Dislaying cached rdev instances:"
     cat ~/.rdevLsCache
@@ -61,7 +61,7 @@ xdev() {
 fconnect() {
   if ! command -v fzf &> /dev/null;  then
     echo "fzf could not be found. Maybe it's not installed?"
-  elif [ "-h" == $1 ]; then
+  elif [[ "-h" == $1 ]]; then
     echo "fconnect filters rdev results and call connect()"
     echo
     echo "Optional params:"
@@ -83,16 +83,16 @@ fconnect() {
 #   (optional) flag: "-c" or "-s" - only open either VS Code or a basic ssh session, respectively
 #######################################
 connect() {
-  if [ -z $1 ]; then
+  if [[ -z $1 ]]; then
     echo "name of host must be given as the one and only argument to this function"
-  elif [ "-c" == $2 ]; then
+  elif [[ "-c" == $2 ]]; then
     echo "Connecting to host: $1"
     echo "starting VS Code..."
     rdev code $1
-  elif [ "-s" == $2 ]; then
+  elif [[ "-s" == $2 ]]; then
     echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
     ssh -t $1 "cd ${1%%/*}; bash -l"
-  elif [ "-rs" ==  $2 ]; then
+  elif [[ "-rs" ==  $2 ]]; then
     echo "starting an RDEV ssh session"
     rdev ssh $1
   else
@@ -111,7 +111,7 @@ connect() {
 #######################################
 confirmRdevCache() {
   FILE=~/.rdevLsCache
-  if [ ! -f "$FILE" ]; then
+  if [[ ! -f "$FILE" ]]; then
     echo "$FILE does not exist. Creating and populating it now..."
     rdev ls > ~/.rdevLsCache
   fi

@@ -2,10 +2,10 @@
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ -e ~/.bash_profile ]];then
-  mv ~/.bash_profile ~/.bash_profile.bak
+if [[ -e ~/.bashrc ]];then
+  mv ~/.bashrc ~/.bashrc.bak
 fi
-ln -sf ${BASEDIR}/bash_profile ~/.bash_profile
+ln -sf ${BASEDIR}/bashrc ~/.bash_rc
 
 if [[ -e ~/.tmux.conf ]];then
   mv ~/.tmux.conf ~/.tmux.conf.bak

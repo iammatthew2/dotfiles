@@ -1,28 +1,33 @@
 #!/bin/bash
 
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
+export PATH=$PATH:/export/content/linkedin/bin
+export NODE_OPTIONS="--max-old-space-size=1638994"
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# the z dir completion helper
+. ~/dotfiles/scripts/z.sh
 
 # update the PATH for remote dev instances
-if [ "$(uname)" == "Linux" ]; then
+if [[ "$(uname)" == "Linux" ]]; then
   export PATH=$PATH:~/dotfiles/bin
 fi
 
 # include rdev_helpers if it exists
-if [ -f ~/dotfiles/rdev_bash_helpers ]; then
+if [[ -f ~/dotfiles/rdev_bash_helpers ]]; then
    . ~/dotfiles/rdev_bash_helpers
 fi
 
 # include ember_helpers if it exists
-if [ -f ~/dotfiles/ember_helpers ]; then
+if [[ -f ~/dotfiles/ember_helpers ]]; then
    . ~/dotfiles/ember_helpers
 fi
 
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ##### methods
-##get info on port 9000 or some other specified port
+##get info on port 9000 or some other specified ports
 port() {
   echo "Running lsof -n -iTCP: on ports 9000 thru 9005 and 9999, 4443, 4200"
   for i in {9000..9005} 
@@ -51,7 +56,7 @@ toggleHost() {
 }
 
 rg() {
-    if [ -t 1 ]; then
+    if [[ -t 1 ]]; then
         command rg -p "$@" | less -RFX
     else
         command rg "$@"
