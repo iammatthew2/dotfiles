@@ -9,9 +9,16 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # the z dir completion helper
 . ~/dotfiles/scripts/z.sh
 
-# update the PATH for remote dev instances
+# rdev instance-specific settings
 if [[ "$(uname)" == "Linux" ]]; then
+  # source executables
   export PATH=$PATH:~/dotfiles/bin
+
+  # change shell to zsh
+  if [[ $- == *i* ]]; then
+    export SHELL=/usr/bin/zsh
+    exec /usr/bin/zsh -l
+  fi
 fi
 
 # include rdev_helpers if it exists
@@ -69,8 +76,8 @@ alias egit='vim ~/dotfiles/gitconfig'
 alias etmux='vim ~/.tmux.conf'
 alias rzsh='. ~/.zshrc'
 alias ezsh='vim ~/.zshrc'
-alias rbash='. ~/.bash_profile'
-alias ebash='vim ~/.bash_profile'
+alias rbash='. ~/.bashrc'
+alias ebash='vim ~/.bashrc'
 alias ebashz='vim ~/dotfiles/bash_zsh_common'
 alias erip='vim ~/.ripgreprc'
 alias ewatch='vim ~/.watchman-processor.config.js'
