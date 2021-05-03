@@ -5,7 +5,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [[ -e ~/.bashrc ]];then
   mv ~/.bashrc ~/.bashrc.bak
 fi
-ln -sf ${BASEDIR}/bashrc ~/.bash_rc
+ln -sf ${BASEDIR}/bashrc ~/.bashrc
 
 if [[ -e ~/.tmux.conf ]];then
   mv ~/.tmux.conf ~/.tmux.conf.bak

@@ -14,11 +14,6 @@ if [[ "$(uname)" == "Linux" ]]; then
   # source executables
   export PATH=$PATH:~/dotfiles/bin
 
-  # change shell to zsh
-  if [[ $- == *i* ]]; then
-    export SHELL=/usr/bin/zsh
-    exec /usr/bin/zsh -l
-  fi
 fi
 
 # include rdev_helpers if it exists
