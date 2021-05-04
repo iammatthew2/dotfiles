@@ -24,8 +24,6 @@ export CLICOLOR=1
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-bind Space:magic-space
-
 HISTFILESIZE=10000
 
 
@@ -38,3 +36,5 @@ source ~/dotfiles/scripts/git-completion.bash
 
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

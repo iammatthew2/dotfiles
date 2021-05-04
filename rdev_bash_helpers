@@ -23,18 +23,6 @@ xdev() {
     cat ~/.rdevLatestCreateResponse
     echo "........................."
      xdev refresh
-    # TODO: update this to handle flags
-    if [[ true ]]; then
-      echo "The <connect> flag was passed"
-      echo "so this script will now call connect() with the new instance name"
-      echo "which will open VS Code and a new ssh connection to that instance"
-      connect $(cat ~/.rdevLatestCreateResponse | grep RUNNING | awk '{print $1}') 
-    fi
-    # untested
-    #if [[ true ]]; then 
-      #echo "running pembery-secure"
-      # yarn pemberly-secure trust voyager-web/$(product | grep RUNNING | awk 'print $1') --use-localhost-for-remote --allow-unsafe-host
-    #fi
   elif [[ "$1" == "delete" ]]; then
     echo "rdev delete wrapper"
     rdev delete $2
