@@ -109,7 +109,7 @@ unset LESS
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-" modify the prompt of awesomepanda theme to display RDEV name
+# modify the prompt of awesomepanda theme to display RDEV name
 if (( ${+RDEV_NAME} )); then
   export PS1='${ret_status}%{$fg_bold[green]%} ${RDEV_NAME} %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}'
 fi
