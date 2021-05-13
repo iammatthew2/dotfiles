@@ -50,7 +50,7 @@ fconnect() {
   if ! command -v fzf &> /dev/null;  then
     echo "fzf could not be found. Maybe it's not installed?"
   elif [[ "-h" == $1 ]]; then
-    echo "fconnect filters rdev results and call connect()"
+    echo "fconnect filters rdev results and calls connect()"
     echo
     echo "Optional params:"
     echo "-h help"
@@ -59,8 +59,18 @@ fconnect() {
     echo "-c  establish an rdev VS Code session"
   else
     confirmRdevCache
-    # call connect() and pass it the result we select from the fzf selection menu along with any flags set
-    connect $(cat ~/.rdevLsCache | grep RUNNING | awk '{print $1}' | fzf --height 25%) ${1}
+    rdevLsCacheResults=$(cat ~/.rdevLsCache | grep RUNNING | awk '{print $1}')
+    resultsCount=$(echo $rdevLsCacheResults | wc -l | sed 's/ //g')
+    echo $resultsCount
+    if [[ resultsCount -gt 1 ]]; then
+      # call connect() and pass it the result we select from the fzf selection menu along with any flags set
+      connect $(echo $rdevLsCacheResults | fzf --height 25%) ${1}
+    elif [[  resultsCount -eq 1 ]]; then
+      # call connect() and pass it the only item in the cached results (along with any flags set)
+      connect $rdevLsCacheResults ${1}
+    else
+      echo "no results in rdevLsCache"
+    fi
   fi
 }
 
