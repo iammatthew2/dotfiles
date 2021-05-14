@@ -6,6 +6,7 @@
 # -c: (default) run test files from git unstaged changes, i.e., test files you seen in 'git status'
 # -d: run test files in from git head
 # -h: help
+# -s: append the `--server` flag
 # files[,files]: run supplied test files
 #######################################
 emberTests() {
@@ -17,34 +18,41 @@ emberTests() {
   filter=''
   server_flag=''
 
-  # handle a set of command flags
-  unset opt OPTARG OPTIND
-  while getopts 'cdf:hs' flag; do
-    case "${flag}" in
-      c ) gitChanges_flag="true" ;;
-      d ) gitHead_flag="true" ;;
-      f ) filter="${OPTARG}" ;;
-      h ) help_flag="true" ;;
-      s ) server_flag="--server" ;;
-    esac
-  done
+while getopts f:cdhs opt; do
+	case $opt in
+	f) filter=$OPTARG ;;
+	c) gitChanges_flag=1 ;;
+	d) gitHead_flag=1 ;;
+	h) help_flag=1 ;;
+	s) server_flag="--server" ;;
+	'?')
+    # looks like a param was passed that was not caught here
+		echo >&2 "Invalid option: ${@:$OPTIND:1}"
+    echo "Unrecognized parameter. Trying running the command with the help (-h) flag"
+		return 1
+	;;
+	esac
+	shift $OPTIND-1
+done
+[[ $1 = -- ]] && shift
 
   # determine which (if any) test files we're going to run
-  if [[ -z "$1" ]]; then
+  if [[ $OPTIND -eq 0 ]] ; then
     # default to '-c' param if no arguments passed in
+    echo "defaulting to `emberTests -c` since no arguments found"
     emberTests -c
     return 1
-  elif [[ "$gitChanges_flag" == "true" ]]; then
+  elif [[ "$gitChanges_flag" == 1 ]]; then
     echo "Testing files in git status:"
     listOfTestFiles=$(git status --porcelain | sed s/^...// | grep test)
     echo "$listOfTestFiles"
     finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//')
-  elif [[ "$gitHead_flag" == "true" ]]; then
+  elif [[ "$gitHead_flag" == 1 ]]; then
     echo "Testing files in git HEAD:"
     listOfTestFiles=$(git diff HEAD^ HEAD --name-only -- '*test*')
     echo "$listOfTestFiles"
     finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//' | xargs echo)
-  elif [[ "$help_flag" == "true" ]]; then
+  elif [[ "$help_flag" == 1 ]]; then
     echo "emberTests is a helper for plugging a set of test files into 'ember exam --path dist --file-path'"
     echo ""
     echo "Usage:"
@@ -52,11 +60,9 @@ emberTests() {
     echo "-d - run test files from files in git head"
     echo "\"filePath[,otherFilePath]\" - file paths of tests to run"
     echo "-f \"filter string\": filter to apply to limit tests in supplied file set"
-  elif [[ $1 == -* ]]; then
-    # looks like a param was passed that was not caught here
-    echo "Unrecognized parameter. Trying running the command with the help (-h) flag"
+    echo "-s - append the `--server` flag"
   else
-    echo "Assuming you've passed in a file/files"
+    echo "Assuming you\'ve passed in a file/files"
     echo "Passing the following to ember exam:"
     finalTestFiles=$1
     echo $finalTestFiles
@@ -68,7 +74,7 @@ emberTests() {
   fi
 
   # run the tests
-  if [[ -z "$filter" ]]; then
+  if [[ -z $filter ]]; then
     ember exam --path dist --file-path ${finalTestFiles} ${server_flag}
   else
     echo ""
