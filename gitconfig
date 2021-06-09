@@ -2,6 +2,7 @@
 	editor = vim
 
 [alias]
+  sw = switch
   co = checkout
   ci = commit
   st = status -s
