@@ -7,7 +7,7 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # the z dir completion helper
-. ~/dotfiles/scripts/z.sh
+#. ~/dotfiles/scripts/z.sh
 
 # rdev instance-specific settings
 if [[ "$(uname)" == "Linux" ]]; then
