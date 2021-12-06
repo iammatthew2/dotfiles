@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # change shell to zsh
-if [[ $- == *i* ]]; then
+if which zsh > /dev/null; then
   export SHELL=/usr/bin/zsh
   exec /usr/bin/zsh -l
 fi
