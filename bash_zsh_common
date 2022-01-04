@@ -7,7 +7,7 @@ export PATH=$PATH:/opt/homebrew/bin
 export PATH=$PATH:/export/content/linkedin/bin
 
 # the z dir completion helper
-. ~/dotfiles/scripts/z.sh
+#. ~/dotfiles/scripts/z.sh
 
 # rdev instance-specific settings
 if [[ "$(uname)" == "Linux" ]]; then

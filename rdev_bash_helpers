@@ -61,8 +61,7 @@ fconnect() {
     confirmRdevCache
     rdevLsCacheResults=$(cat ~/.rdevLsCache | grep RUNNING | awk '{print $1}')
     resultsCount=$(echo $rdevLsCacheResults | wc -l | sed 's/ //g')
-    echo $rdevLsCache
-		echo "running instances: " $resultsCount
+    echo $resultsCount
     if [[ resultsCount -gt 1 ]]; then
       # call connect() and pass it the result we select from the fzf selection menu along with any flags set
       connect $(echo $rdevLsCacheResults | fzf --height 25%) ${1}
