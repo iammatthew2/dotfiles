@@ -42,8 +42,7 @@ GREEN=`tput setaf 2`
 RESET=`tput sgr0`
 
   # determine which (if any) test files we're going to run
-  # this needs to be updated. Does not handle files being passed in
-  if [[ $OPTIND -eq 1 ]] ; then
+  if [[ $OPTIND -eq 1 && $# -eq 0 ]] ; then
     # default to '-c' param if no arguments passed in
     echo -e "${RED}defaulting to 'emberTests -c' since no arguments found${RESET}"
     emberTests -c
@@ -55,14 +54,14 @@ RESET=`tput sgr0`
     echo "Testing files in git HEAD:"
     listOfTestFiles=$(git diff HEAD^ HEAD --name-only -- '*test*')
   elif [[ "$help_flag" == 1 ]]; then
-    echo "emberTests is a helper for plugging a set of test files into 'ember exam --path dist --file-path'"
-    echo ""
+    echo -e "emberTests is a helper for plugging a set of test files into 'ember exam --path dist --file-path'\n"
     echo "Usage:"
     echo "${GREEN}[file, ...]${RESET} - list specific files"
     echo "${GREEN}-c (default)${RESET}:  run test files from git unstaged changes (see 'git status')"
     echo "${GREEN}-d${RESET}: run test files from files in git head"
     echo "${GREEN}-f${RESET}: filter applied to limit tests inside supplied files"
     echo "${GREEN}-s${RESET}: append the '--server' flag"
+    return 1
   else
     echo "Assuming you\'ve passed in a file/files"
     echo "Passing the following to ember exam:"
@@ -73,8 +72,6 @@ RESET=`tput sgr0`
   finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//' | xargs echo)
   # exit early since there are no files to test and we'll wait forever if this gets passed to ember exam
   if [[ -z "$finalTestFiles" ]]; then
-    echo -e "${RED}no test files to test. Exiting${RESET}"
-    return 1
   fi
 
   # run the tests
@@ -82,7 +79,7 @@ RESET=`tput sgr0`
     ember exam --path dist --file-path ${finalTestFiles} ${server_flag}
   else
     echo ""
-    echo "Filtering for: ${filter}"
+    echo "Filtering for: ${GREEN}${filter}${RESET}"
     echo ""
     ember exam --path dist --file-path ${finalTestFiles} --filter ${filter} ${server_flag}
   fi
