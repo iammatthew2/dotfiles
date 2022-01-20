@@ -36,40 +36,44 @@ while getopts f:cdhs opt; do
 done
 [[ $1 = -- ]] && shift
 
+# setup colors for some nice echoing
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+RESET=`tput sgr0`
+
   # determine which (if any) test files we're going to run
-  if [[ $OPTIND -eq 0 ]] ; then
+  # this needs to be updated. Does not handle files being passed in
+  if [[ $OPTIND -eq 1 ]] ; then
     # default to '-c' param if no arguments passed in
-    echo "defaulting to `emberTests -c` since no arguments found"
+    echo -e "${RED}defaulting to 'emberTests -c' since no arguments found${RESET}"
     emberTests -c
     return 1
   elif [[ "$gitChanges_flag" == 1 ]]; then
     echo "Testing files in git status:"
     listOfTestFiles=$(git status --porcelain | sed s/^...// | grep test)
-    echo "$listOfTestFiles"
-    finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//')
   elif [[ "$gitHead_flag" == 1 ]]; then
     echo "Testing files in git HEAD:"
     listOfTestFiles=$(git diff HEAD^ HEAD --name-only -- '*test*')
-    echo "$listOfTestFiles"
-    finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//' | xargs echo)
   elif [[ "$help_flag" == 1 ]]; then
     echo "emberTests is a helper for plugging a set of test files into 'ember exam --path dist --file-path'"
     echo ""
     echo "Usage:"
-    echo "-c (default) - run test files from git unstaged changes (see 'git status')"
-    echo "-d - run test files from files in git head"
-    echo "\"filePath[,otherFilePath]\" - file paths of tests to run"
-    echo "-f \"filter string\": filter to apply to limit tests in supplied file set"
-    echo "-s - append the `--server` flag"
+    echo "${GREEN}[file, ...]${RESET} - list specific files"
+    echo "${GREEN}-c (default)${RESET}:  run test files from git unstaged changes (see 'git status')"
+    echo "${GREEN}-d${RESET}: run test files from files in git head"
+    echo "${GREEN}-f${RESET}: filter applied to limit tests inside supplied files"
+    echo "${GREEN}-s${RESET}: append the '--server' flag"
   else
     echo "Assuming you\'ve passed in a file/files"
     echo "Passing the following to ember exam:"
-    finalTestFiles=$1
-    echo $finalTestFiles
+    listOfTestFiles=$1
   fi
 
+  echo -e "${GREEN}${listOfTestFiles}${RESET}"
+  finalTestFiles=$(echo "$listOfTestFiles" | tr '\n' ',' | sed 's/.$//' | xargs echo)
   # exit early since there are no files to test and we'll wait forever if this gets passed to ember exam
   if [[ -z "$finalTestFiles" ]]; then
+    echo -e "${RED}no test files to test. Exiting${RESET}"
     return 1
   fi
 
