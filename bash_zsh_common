@@ -1,10 +1,10 @@
 #!/bin/bash
 
-export PATH=$PATH:/export/content/linkedin/bin
 export NODE_OPTIONS="--max-old-space-size=1638994"
-
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH=$PATH:/opt/homebrew/bin
+export PATH=$PATH:/export/content/linkedin/bin
 
 # the z dir completion helper
 . ~/dotfiles/scripts/z.sh
