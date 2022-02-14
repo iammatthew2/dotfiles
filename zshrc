@@ -24,8 +24,10 @@ prompt pure
 unset LESS
 
 # modify the prompt of awesomepanda theme to display RDEV name
-if (( ${+RDEV_NAME} )); then
-  export PS1='${ret_status}%{$fg_bold[green]%} ${RDEV_NAME} %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}'
-fi
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+# if (( ${+RDEV_NAME} )); then
+#   export PS1='${ret_status}%{$fg_bold[green]%} ${RDEV_NAME} %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}'
+# fi
+# if (( ${+RDEV_NAME} )); then
+  # export PS1='${ret_status}%{$fg_bold[green]%} ${RDEV_NAME} %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}'
+# fi
+>>>>>>> 7d5de1e (update zsh theme - might break remote)
