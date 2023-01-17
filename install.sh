@@ -7,9 +7,9 @@ if [[ -e ~/.bashrc ]];then
 fi
 ln -sf ${BASEDIR}/bashrc ~/.bashrc
 
-if [[ -e ~/.tmux.conf ]];then
-  mv ~/.tmux.conf ~/.tmux.conf.bak
-fi
+# if [[ -e ~/.tmux.conf ]];then
+#   mv ~/.tmux.conf ~/.tmux.conf.bak
+# fi
 ln -sf ${BASEDIR}/tmux.conf ~/.tmux.conf
 
 if [[ -e ~/.ripgreprc ]];then
