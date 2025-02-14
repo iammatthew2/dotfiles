@@ -21,11 +21,6 @@ if [[ -f ~/dotfiles/rdev_bash_helpers ]]; then
    . ~/dotfiles/rdev_bash_helpers
 fi
 
-# include ember_helpers if it exists
-if [[ -f ~/dotfiles/ember_helpers ]]; then
-   . ~/dotfiles/ember_helpers
-fi
-
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ##### methods
