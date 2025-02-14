@@ -1,6 +1,0 @@
-{
-    "javascript.suggestionActions.enabled": false,
-    "tsserver.implicitProjectConfig.experimentalDecorators": true,
-    "tsserver.log":"verbose"
-}
-

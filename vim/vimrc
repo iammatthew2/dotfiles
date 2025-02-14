@@ -1,7 +1,3 @@
-source $HOME/.vim/config/coc.vimrc 
-
-hi link CocFloating markdown
-
 filetype plugin indent on
 syntax on
 set visualbell
@@ -40,8 +36,6 @@ augroup END
 " ***************************************************
 " Edit this config:
 nmap <leader>ev :vsp $MYVIMRC<CR>
-" Edit the COC config:
-nmap <leader>ec :vsp $HOME/.vim/config/coc.vimrc<CR>
 " Toggle NERDTree at current file:
 nmap <leader>tf :NERDTreeFind<CR>
 " Toggle NERDTree:

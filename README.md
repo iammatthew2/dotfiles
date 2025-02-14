@@ -4,10 +4,8 @@ These dotfiles support:
 
 * [bash](https://www.gnu.org/software/bash/)
 * [vim](https://www.vim.org/)
-* [tmux](https://github.com/tmux/tmux)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [git](https://git-scm.com/docs/git-config)
-* [watchman-processor](https://github.com/markis/watchman-processor)
 
 ## Setup
 
@@ -28,11 +26,9 @@ Run the following commands to add each of the symlinks:
 
 * `$ ln -sf ~/dotfiles/zshrc ~/.zshrc`
 * `$ ln -sf ~/dotfiles/bash_profile ~/.bash_profile`
-* `$ ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf`
 * `$ ln -sf ~/dotfiles/ripgreprc ~/.ripgreprc`
 * `$ ln -sf ~/dotfiles/vim ~/.vim`
 * `$ ln -sf ~/dotfiles/vim/vimrc ~/.vimrc`
-* `$ ln -sf ~/dotfiles/watchman-processor.config.js ~/.watchman-processor.config.js`
 
 ### Add dotfile configs to your local .gitconfig
 

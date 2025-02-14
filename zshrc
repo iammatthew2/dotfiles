@@ -23,10 +23,23 @@ prompt pure
 
 unset LESS
 
-# modify the prompt of awesomepanda theme to display RDEV name
-# if (( ${+RDEV_NAME} )); then
-#   export PS1='${ret_status}%{$fg_bold[green]%} ${RDEV_NAME} %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}'
-# fi
-# if (( ${+RDEV_NAME} )); then
-  # export PS1='${ret_status}%{$fg_bold[green]%} ${RDEV_NAME} %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}'
-# fi
+
+# pnpm
+export PNPM_HOME="/Users/mvillene/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# $HOME/.cargo/bin is added to user PATH by MDM
+case ":${PATH}:" in
+    *:"$HOME/.cargo/bin":*)
+    ;;
+    *)
+    export PATH="$PATH:$HOME/.cargo/bin"
+    ;;
+esac
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

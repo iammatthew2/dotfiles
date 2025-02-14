@@ -26,7 +26,6 @@ export CLICOLOR=1
 
 HISTFILESIZE=10000
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # load nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # load nvm bash_completion
@@ -38,3 +37,11 @@ source ~/dotfiles/scripts/git-completion.bash
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+# $HOME/.cargo/bin is added to user PATH by MDM
+case ":${PATH}:" in
+    *:"$HOME/.cargo/bin":*)
+    ;;
+    *)
+    export PATH="$PATH:$HOME/.cargo/bin"
+    ;;
+esac

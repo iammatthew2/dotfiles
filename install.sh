@@ -7,11 +7,6 @@ if [[ -e ~/.bashrc ]];then
 fi
 ln -sf ${BASEDIR}/bashrc ~/.bashrc
 
-# if [[ -e ~/.tmux.conf ]];then
-#   mv ~/.tmux.conf ~/.tmux.conf.bak
-# fi
-ln -sf ${BASEDIR}/tmux.conf ~/.tmux.conf
-
 if [[ -e ~/.ripgreprc ]];then
   mv ~/.ripgreprc ~/.ripgreprc.bak
 fi
@@ -31,10 +26,6 @@ if [[ -e ~/.zshrc ]];then
   mv ~/.zshrc ~/.zshrc.bak
 fi
 ln -sf ${BASEDIR}/zshrc ~/.zshrc
-
-if [[ -e ~/.watchman-processor.config.js ]];then
-  mv ~/.watchman-processor.config.js ~/.watchman-processor.config.js.bak
-fi
 
 # handle zsh plugins & themes
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
