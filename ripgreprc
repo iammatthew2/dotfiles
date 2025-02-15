@@ -1,6 +1,0 @@
---type-add
-web:*.{html, css, scss, js, hbs, tl}*
---type-add
-scss:*.scss
---type-add
-test:*{test,Test, TEST}*
