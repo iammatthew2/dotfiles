@@ -128,9 +128,9 @@ prompt_purification_setup() {
 
     # Set prompt color based on OS
     if [[ "$(uname)" == "Darwin" ]]; then
-        PROMPT='%F{magenta}${PWD##*/}%f %B%F{blue}>%f%b '
+        PROMPT='%F{magenta}${PWD##*/}%f %B%F{117}>%f%b '
     else
-        PROMPT='%F{green}%m %F{white}%~ %F{magenta}$%f '
+        PROMPT='%F{green}${RDEV_NAME} %F{117}%~ %F{magenta}$%f '
     fi
 }
 
