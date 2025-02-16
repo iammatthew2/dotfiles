@@ -48,3 +48,11 @@ source $DOTFILES/zsh_config/completion.zsh
 
 fpath=($DOTFILES/zsh_config/prompt $fpath)
 source $DOTFILES/zsh_config/prompt/prompt_purification_setup
+
+# Clone the repo only if it's not already installed
+if [[ ! -d "$DOTFILES/zsh_config/zsh-syntax-highlighting" ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$DOTFILES/zsh_config/zsh-syntax-highlighting"
+fi
+
+# Source the plugin
+source "$DOTFILES/zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

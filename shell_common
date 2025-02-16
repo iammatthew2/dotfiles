@@ -28,7 +28,7 @@ if [[ -n "$ZSH_NAME" ]]; then
 fi
 
 if [[ "$CURRENT_SHELL" == "bash" ]]; then
-  Switch to Zsh if available and correct path
+  # Switch to ZSH if available and correct path
   if [[ -x "$(command -v zsh)" ]]; then
     export SHELL="$(command -v zsh)"
     [[ $- == *i* ]] && exec "$SHELL"
