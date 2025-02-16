@@ -107,9 +107,7 @@ prompt_purity_precmd() {
 
 prompt_purification_setup() {
     # Display git branch
-
     autoload -Uz add-zsh-hook
-    # add-zsh-hook precmd prompt_purity_precmd
 
     ZSH_THEME_GIT_PROMPT_PREFIX=" %F{red}λ%f:"
     ZSH_THEME_GIT_PROMPT_DIRTY=""
@@ -127,12 +125,13 @@ prompt_purification_setup() {
 
     prompt_git_branch
     RPROMPT='$(prompt_git_info) $(git_prompt_status)'
-    # PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
-    # PROMPT='%F{white}${PWD##*/} %B%F{blue}>%f%b '
-    PROMPT='%F{magenta}${PWD##*/}%f %B%F{blue}>%f%b '
 
-
-    # PROMPT='%F{blue}{%~}%f > '
+    # Set prompt color based on OS
+    if [[ "$(uname)" == "Darwin" ]]; then
+        PROMPT='%F{magenta}${PWD##*/}%f %B%F{blue}>%f%b '
+    else
+        PROMPT='%F{green}%m %F{white}%~ %F{magenta}$%f '
+    fi
 }
 
 prompt_purification_setup
