@@ -23,10 +23,17 @@
   # search HEAD files for a file
   dhs = "!git diff HEAD^ HEAD $(git diff HEAD^ HEAD --name-only | fzf --height 20% --reverse)"
 
+  # fzf wrapped git branch switching
+  swx = "!f() { git switch \"$(git branch --format='%(refname:short)' | fzf --height 20% --reverse)\"; }; f"
+
   # search unstaged files for a file
-  ds = "!git diff $(git status -s | awk '{print $2}' | fzf --height 20% --reverse)"
+  ds = "!f() { git diff \"$(git status -s | awk '{print $2}' | fzf --height 20% --reverse)\"; }; f"
+
+  # search diff-head files for a file
+  dhs = "!f() { f=$(git dhn | fzf --height 20% --reverse); [ -n \"$f\" ] && git diff HEAD^ HEAD -- \"$f\"; }; f"
 
   # search commit logs for a keyword and author (defaults to current user)
+  # git find <keyword> <author>
   find = "!f(){ git log -50 -i --pretty=format:'%C(red black)%h%Creset %s %C(yellow black)%an' --grep \"$1\" --author \"${2-$(git config user.name)}\"; };f"
 
   # simplified logs
