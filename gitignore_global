@@ -6,3 +6,5 @@ yarn.lock
 .env
 .idea
 voyager-web/bin
+packages/sdui-core/src/client-components/text-editor/text-editor.test.tsx.snap
+**/__snapshots__/

@@ -12,6 +12,8 @@ for p in "$HOME/.volta/bin" "/opt/homebrew/bin" "/export/content/linkedin/bin" "
   [[ ":$PATH:" != *":$p:"* ]] && PATH="$p:$PATH"
 done
 export PATH
+gopath=$(go env GOPATH)
+export PATH="$gopath/bin:$PATH"
 
 # Load Scripts (shared)
 [ -f "$HOME/dotfiles/scripts/z.sh" ] && . "$HOME/dotfiles/scripts/z.sh"
