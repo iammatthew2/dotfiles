@@ -23,12 +23,6 @@ export PATH="$gopath/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-if [[ -n "$ZSH_NAME" ]]; then
-  if [[ -f "$HOME/dotfiles/zsh_setup" ]]; then
-    source "$HOME/dotfiles/zsh_setup"
-  fi
-fi
-
 if [[ "$CURRENT_SHELL" == "bash" ]]; then
   # Switch to ZSH if available and correct path
   if [[ -x "$(command -v zsh)" ]]; then
@@ -46,9 +40,6 @@ if [[ "$CURRENT_SHELL" == "bash" ]]; then
 
   export LSCOLORS=GxFxCxDxBxegedabagaced
   export CLICOLOR=1
-
-  # Load fzf if available
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 
 # Aliases
