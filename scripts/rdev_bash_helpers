@@ -37,7 +37,7 @@ xdev() {
     echo "Dislaying cached rdev instances:"
     cat ~/.rdevLsCache
   else
-    rdev $@
+    rdev "$@"
   fi
 }
 

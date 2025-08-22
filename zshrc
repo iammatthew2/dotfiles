@@ -1,15 +1,22 @@
-#!/bin/bash
+#!/bin/zsh
 
-###############################
-# EXPORT ENVIRONMENT VARIABLE #
-###############################
+# +---------+
+# | ENV    |
+# +---------+
 
 export DOTFILES="$HOME/dotfiles"
 export EDITOR="vim"
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 export CLICOLOR=1
+# temporarily point to dev installation - remove this once app is released
+export PATH="$HOME/dev/zoink_dev/bin:$PATH"
 
+# +---------+
+# | UTILS  |
+# +---------+
+
+# try_source sources a given file if it exists and prints helpful error messages
 try_source() {
   local file_path="$1"
   
@@ -34,8 +41,7 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax.
 # +------------+
 # | FZF SETUP  |
 # +------------+
-# Enable fzf keybindings
-# fzf keybindings and completions
+
 try_source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 try_source "/opt/homebrew/opt/fzf/shell/completion.zsh"
 export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40% --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
@@ -57,7 +63,6 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
-
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -68,30 +73,25 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
-# completion
-autoload -U compinit; compinit
-_comp_options+=(globdots) # With hidden files
-try_source "$DOTFILES/zsh_config/completion.zsh"
-
 # +--------+
 # | PROMPT |
 # +--------+
 
 fpath=($DOTFILES/zsh_config/prompt $fpath)
-try_source "$DOTFILES/zsh_config/prompt/prompt_purification_setup"
+try_source "$DOTFILES/zsh_config/prompt/prompt_purification_setup.zsh"
 
-# Clone the repo only if the main script file is missing
+# +---------------------+
+# | SYNTAX HIGHLIGHTING |
+# +---------------------+
 if [[ ! -f "$DOTFILES/zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$DOTFILES/zsh_config/zsh-syntax-highlighting"
 fi
 
-# Source the plugin if the file exists
+# +---------------------+
+# | GENERAL SOURCING |
+# +---------------------+
 try_source "$DOTFILES/zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# Load shared shell configuration
-try_source ~/dotfiles/shell_common
-
-# Zoink shell integration
+try_source "$DOTFILES/zsh_config/completion.zsh"
+try_source "$DOTFILES/shell_common"
+try_source "$DOTFILES/scripts/rdev_bash_helpers"
 try_source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
-# temporarily point to dev installation
-export PATH="$HOME/dev/zoink_dev/bin:$PATH"

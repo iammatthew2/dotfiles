@@ -9,10 +9,20 @@
 # | General |
 # +---------+
 
-# source ./gambit.zsh
+# source ./gambit.zsh (modified by me)
 
 # Load more completions
-fpath=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
+fpath=($DOTFILES/zsh_config/zsh-completions/src $fpath)
+
+# Clone zsh-completions only if the main script file is missing
+if [[ ! -f "$DOTFILES/zsh_config/zsh-completions/zsh-completions.plugin.zsh" ]]; then
+  git clone https://github.com/zsh-users/zsh-completions.git "$DOTFILES/zsh_config/zsh-completions"
+fi
+
+# Load zsh-completions
+if [[ -f "$DOTFILES/zsh_config/zsh-completions/zsh-completions.plugin.zsh" ]]; then
+  source "$DOTFILES/zsh_config/zsh-completions/zsh-completions.plugin.zsh"
+fi
 
 # Should be called before compinit
 zmodload zsh/complist
@@ -30,8 +40,8 @@ bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
 
-autoload -U compinit; compinit
 _comp_options+=(globdots) # With hidden files
+autoload -U compinit; compinit
 
 # Only work with the Zsh function vman
 # See $DOTFILES/zsh/scripts.zsh

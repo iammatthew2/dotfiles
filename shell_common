@@ -15,9 +15,6 @@ export PATH
 gopath=$(go env GOPATH)
 export PATH="$gopath/bin:$PATH"
 
-# Load Scripts (shared)
-[ -f "$HOME/dotfiles/scripts/z.sh" ] && . "$HOME/dotfiles/scripts/z.sh"
-[ -f "$HOME/dotfiles/rdev_bash_helpers" ] && . "$HOME/dotfiles/rdev_bash_helpers"
 
 # NVM (shared)
 export NVM_DIR="$HOME/.nvm"
@@ -25,12 +22,12 @@ export NVM_DIR="$HOME/.nvm"
 
 if [[ "$CURRENT_SHELL" == "bash" ]]; then
   # Switch to ZSH if available and correct path
-  if [[ -x "$(command -v zsh)" ]]; then
-    export SHELL="$(command -v zsh)"
-    [[ $- == *i* ]] && exec "$SHELL"
-  fi
-  # If zsh not avaiable, setup for bash:
-  [ -f "$HOME/dotfiles/scripts/git-completion.bash" ] && . "$HOME/dotfiles/scripts/git-completion.bash"
+  # if [[ -x "$(command -v zsh)" ]]; then
+  #   echo "Switching to ZSH"
+  #   export SHELL="$(command -v zsh)"
+  #   [[ $- == *i* ]] && exec "$SHELL"
+  # fi
+  echo "Using BASH, did not attempt to switch to ZSH"
   # Custom Bash prompt
   if [[ "$(uname)" == "Darwin" ]]; then
     export PS1='\[\e[1;32m\]\h\[\e[m\]\[\e[1;30m\]\w\[\e[m\]\[\e[1;35m\]$\[\e[m\]\[\e[1;32m\]\[\e[m\] '
@@ -70,8 +67,4 @@ toggleHost() {
     *server1*) sudo cp /etc/hosts_server2 /etc/hosts ;;
     *) sudo cp /etc/hosts_local /etc/hosts ;;
   esac
-}
-
-rg() {
-  [[ -t 1 ]] && command rg -p "$@" | less -RFX || command rg "$@"
 }
