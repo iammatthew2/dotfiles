@@ -42,8 +42,22 @@ setopt EXTENDED_GLOB        # Use extended globbing syntax.
 # | FZF SETUP  |
 # +------------+
 
-try_source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-try_source "/opt/homebrew/opt/fzf/shell/completion.zsh"
+# Try multiple common FZF installation locations
+for fzf_path in \
+  "/opt/homebrew/opt/fzf/shell" \
+  "/usr/local/opt/fzf/shell" \
+  "/usr/share/fzf/shell" \
+  "/usr/share/doc/fzf/examples" \
+  "/opt/fzf/shell" \
+  "$HOME/.fzf/shell"; do
+  
+  if [[ -d "$fzf_path" ]]; then
+    try_source "$fzf_path/key-bindings.zsh"
+    try_source "$fzf_path/completion.zsh"
+    break
+  fi
+done
+
 export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40% --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
 
 # +------------+
