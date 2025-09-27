@@ -7,13 +7,20 @@ CURRENT_SHELL=$(ps -p $$ -ocomm=)
 export NODE_OPTIONS="--max-old-space-size=1638994"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
-# Paths (avoid redundant appends)
-for p in "$HOME/.volta/bin" "/opt/homebrew/bin" "/export/content/linkedin/bin" "$HOME/.cargo/bin"; do
-  [[ ":$PATH:" != *":$p:"* ]] && PATH="$p:$PATH"
-done
+# Environment Variables (shared)
+export NODE_OPTIONS="--max-old-space-size=1638994"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# Setup PATH
+PATH="/opt/homebrew/bin"
+PATH="$PATH:$HOME/.volta/bin"
+PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$(go env GOPATH)/bin"
+PATH="$PATH:$HOME/dev/zoink_dev/bin"
+PATH="$PATH:/export/content/linkedin/bin"
+PATH="$PATH:/usr/local/linkedin/bin"
+PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH
-gopath=$(go env GOPATH)
-export PATH="$gopath/bin:$PATH"
 
 
 # NVM (shared)
