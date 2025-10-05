@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null; then
+  eval "$(keychain --quiet --agents ssh --eval $(find ~/.ssh -maxdepth 1 -type f -name 'raspberry_key_*' ! -name '*.pub'))"
+  eval "$(zoxide init bash)"
+fi
+
 # Detect the shell
 CURRENT_SHELL=$(ps -p $$ -ocomm=)
 
@@ -15,11 +20,13 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 PATH="/opt/homebrew/bin"
 PATH="$PATH:$HOME/.volta/bin"
 PATH="$PATH:$HOME/.cargo/bin"
-PATH="$PATH:$(go env GOPATH)/bin"
 PATH="$PATH:$HOME/dev/zoink_dev/bin"
 PATH="$PATH:/export/content/linkedin/bin"
 PATH="$PATH:/usr/local/linkedin/bin"
 PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+if command -v go >/dev/null 2>&1; then
+  PATH="$PATH:$(go env GOPATH)/bin"
+fi
 export PATH
 
 

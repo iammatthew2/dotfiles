@@ -129,11 +129,13 @@ prompt_purification_setup() {
     prompt_git_branch
     RPROMPT='$(prompt_git_info) $(git_prompt_status)'
 
-    # Set prompt color based on OS
+       # Set prompt color based on OS
     if [[ "$(uname)" == "Darwin" ]]; then
         PROMPT='%F{magenta}${PWD##*/}%f %B%F{117}>%f%b '
-    else
+    elif [[ -n "$RDEV_NAME" ]]; then
         PROMPT='%F{green}${RDEV_NAME} %F{117}%~ %F{magenta}$%f '
+    else
+        PROMPT='%F{green}%m %F{117}%~ %F{magenta}$%f '
     fi
 }
 
