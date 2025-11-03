@@ -87,7 +87,7 @@ connect() {
   elif [[ "-c" == $2 ]]; then
     echo "Connecting to host: $1"
     echo "starting VS Code..."
-    rdev code $1
+    rdev-code "$1"
   elif [[ "-s" == $2 ]]; then
     echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
     ssh -t $1 "cd ${1%%/*}; bash -l"
@@ -97,7 +97,7 @@ connect() {
   else
     echo "Connecting to host: $1"
     echo "starting VS Code..."
-    rdev code $1
+    rdev-code "$1"
     echo "starting ssh session and CD'ing to the ${1%%/*} dir..."
     ssh -t $1 "cd ${1%%/*}; bash -l"
   fi
@@ -109,9 +109,43 @@ connect() {
 #   none
 #######################################
 confirmRdevCache() {
-  FILE=~/.rdevLsCache
-  if [[ ! -f "$FILE" ]]; then
-    echo "$FILE does not exist. Creating and populating it now..."
-    rdev ls > ~/.rdevLsCache
+  if [[ ! -f "$rdevLsCache" ]]; then
+    echo "Cache file not found. Rebuilding cache..."
+    rdev ls > "$rdevLsCache"
   fi
 }
+
+#######################################
+# Check if a host is an API codebase by looking for "-api" pattern
+# Arguments:
+#   host: name of rdev host to check
+# Returns:
+#   0 if API codebase, 1 if not
+#######################################
+check-idea-flag() {
+  local host="$1"
+  case "$host" in
+    *-api/*)
+      return 0  # API codebase detected
+      ;;
+    *)
+      return 1  # Regular codebase
+      ;;
+  esac
+}
+
+#######################################
+# Execute rdev code command with appropriate flags
+# Arguments:
+#   host: name of rdev host to connect to
+#######################################
+rdev-code() {
+  local host="$1"
+  if check-idea-flag "$host"; then
+    rdev code "$host" --idea
+  else
+    rdev code "$host"
+  fi
+}
+
+#######################################
