@@ -9,6 +9,7 @@
   ca = commit --amend --no-edit
   br = branch
   com = checkout master
+  swm = switch master
   dn = diff --name-only
   dh = diff HEAD^ HEAD
   dhn = diff HEAD^ HEAD --name-only

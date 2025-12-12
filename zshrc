@@ -112,3 +112,5 @@ try_source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
 
 # Zoink shell integration
 source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
+source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
+export PATH="/Users/mvillene/dev/zoink_dev/bin:$PATH"
