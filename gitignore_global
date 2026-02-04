@@ -10,3 +10,5 @@ voyager-web/bin
 packages/sdui-core/src/client-components/text-editor/text-editor.test.tsx.snap
 **/__snapshots__/
 .personal_chatbot_instructions.md
+CLAUDE.local.md
+.claude

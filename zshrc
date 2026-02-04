@@ -114,3 +114,7 @@ try_source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
 source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
 source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
 export PATH="/Users/mvillene/dev/zoink_dev/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
