@@ -110,9 +110,6 @@ try_source "$DOTFILES/shell_common"
 try_source "$DOTFILES/scripts/rdev_bash_helpers"
 try_source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
 
-# Zoink shell integration
-source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
-source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
 export PATH="/Users/mvillene/dev/zoink_dev/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 

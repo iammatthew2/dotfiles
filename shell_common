@@ -1,26 +1,14 @@
 #!/bin/bash
 
-if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null; then
-  eval "$(keychain --quiet --agents ssh --eval $(find ~/.ssh -maxdepth 1 -type f -name 'raspberry_key_*' ! -name '*.pub'))"
-  eval "$(zoxide init bash)"
-fi
-
 # Detect the shell
 CURRENT_SHELL=$(ps -p $$ -ocomm=)
 
-# Environment Variables (shared)
-export NODE_OPTIONS="--max-old-space-size=1638994"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
-# Environment Variables (shared)
-export NODE_OPTIONS="--max-old-space-size=1638994"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
-# Setup PATH
-PATH="/opt/homebrew/bin"
+# Setup PATH (early, before any command checks)
+PATH="/opt/homebrew/bin:$PATH"
 PATH="$PATH:$HOME/.volta/bin"
 PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/dev/zoink_dev/bin"
+PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:/export/content/linkedin/bin"
 PATH="$PATH:/usr/local/linkedin/bin"
 PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -29,6 +17,23 @@ if command -v go >/dev/null 2>&1; then
 fi
 export PATH
 
+if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null; then
+  echo "Raspberry Pi config initialized"
+  eval "$(keychain --quiet --agents ssh --eval $(find ~/.ssh -maxdepth 1 -type f -name 'raspberry_key_*' ! -name '*.pub'))"
+  if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+  else
+    echo "Zoxide not installed - install via https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation"
+  fi
+fi
+
+# Environment Variables (shared)
+export NODE_OPTIONS="--max-old-space-size=1638994"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# Environment Variables (shared)
+export NODE_OPTIONS="--max-old-space-size=1638994"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # NVM (shared)
 export NVM_DIR="$HOME/.nvm"
@@ -41,7 +46,7 @@ if [[ "$CURRENT_SHELL" == "bash" ]]; then
   #   export SHELL="$(command -v zsh)"
   #   [[ $- == *i* ]] && exec "$SHELL"
   # fi
-  echo "Using BASH, did not attempt to switch to ZSH"
+  echo "Using BASH, did not attempt to switch to ZSH. Zoxide not initialized for bash"
   # Custom Bash prompt
   if [[ "$(uname)" == "Darwin" ]]; then
     export PS1='\[\e[1;32m\]\h\[\e[m\]\[\e[1;30m\]\w\[\e[m\]\[\e[1;35m\]$\[\e[m\]\[\e[1;32m\]\[\e[m\] '

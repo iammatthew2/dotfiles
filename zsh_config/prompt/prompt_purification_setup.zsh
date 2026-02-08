@@ -88,7 +88,6 @@ git_prompt_status() {
   fi
 }
 
-
 prompt_git_branch() {
     autoload -Uz vcs_info 
     precmd_vcs_info() {
@@ -106,6 +105,12 @@ prompt_git_info() {
 prompt_purity_precmd() {
     # Pass a line before each prompt
     print -P ''
+}
+
+prompt_iterm2_mark() {
+  if (( $+functions[iterm2_prompt_mark] )); then
+    print -n "%{$(iterm2_prompt_mark)%} "
+  fi
 }
 
 prompt_purification_setup() {
@@ -129,13 +134,13 @@ prompt_purification_setup() {
     prompt_git_branch
     RPROMPT='$(prompt_git_info) $(git_prompt_status)'
 
-       # Set prompt color based on OS
+    # Set prompt color based on OS
     if [[ "$(uname)" == "Darwin" ]]; then
-        PROMPT='%F{magenta}${PWD##*/}%f %B%F{117}>%f%b '
+      PROMPT='$(prompt_iterm2_mark)%F{magenta}${PWD##*/}%f %B%F{117}>%f%b '
     elif [[ -n "$RDEV_NAME" ]]; then
-        PROMPT='%F{green}${RDEV_NAME} %F{117}%~ %F{magenta}$%f '
+      PROMPT='$(prompt_iterm2_mark)%F{green}${RDEV_NAME} %F{117}%~ %F{magenta}$%f '
     else
-        PROMPT='%F{green}%m %F{117}%~ %F{magenta}$%f '
+      PROMPT='$(prompt_iterm2_mark)%F{green}%m %F{117}%~ %F{magenta}$%f '
     fi
 }
 
