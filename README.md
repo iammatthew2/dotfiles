@@ -15,6 +15,7 @@ These dot files can be installed with with the included install script or manual
   * Clone this repo
   * Install: `$ cd dotfiles && . install.sh`
 
+
 * Manual install:
   * Clone this repo
   * Create symlinks (see below)
