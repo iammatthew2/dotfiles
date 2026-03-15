@@ -19,17 +19,17 @@ export PATH
 
 if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null; then
   echo "Raspberry Pi config initialized"
-  eval "$(keychain --quiet --agents ssh --eval $(find ~/.ssh -maxdepth 1 -type f -name 'raspberry_key_*' ! -name '*.pub'))"
+  if command -v keychain >/dev/null 2>&1; then
+    eval "$(keychain --quiet --agents ssh --eval $(find ~/.ssh -maxdepth 1 -type f -name 'raspberry_key_*' ! -name '*.pub'))"
+  else
+    echo "keychain not installed - skipping ssh key bootstrap"
+  fi
   if command -v zoxide >/dev/null 2>&1; then
     eval "$(zoxide init zsh)"
   else
     echo "Zoxide not installed - install via https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation"
   fi
 fi
-
-# Environment Variables (shared)
-export NODE_OPTIONS="--max-old-space-size=1638994"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Environment Variables (shared)
 export NODE_OPTIONS="--max-old-space-size=1638994"

@@ -9,6 +9,7 @@ export EDITOR="vim"
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 export CLICOLOR=1
+
 # temporarily point to dev installation - remove this once app is released
 export PATH="$HOME/dev/zoink_dev/bin:$PATH"
 
@@ -58,7 +59,15 @@ for fzf_path in \
   fi
 done
 
-export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40% --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40% --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
+elif command -v xclip >/dev/null 2>&1; then
+  export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40% --bind 'ctrl-y:execute-silent(echo {} | xclip -selection clipboard)+abort'"
+elif command -v wl-copy >/dev/null 2>&1; then
+  export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40% --bind 'ctrl-y:execute-silent(echo {} | wl-copy)+abort'"
+else
+  export FZF_CTRL_R_OPTS="--layout=reverse --preview-window=down:3 --border --height=40%"
+fi
 
 # +------------+
 # | PREVENT CORRECTION |
@@ -108,9 +117,9 @@ try_source "$DOTFILES/zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting
 try_source "$DOTFILES/zsh_config/completion.zsh"
 try_source "$DOTFILES/shell_common"
 try_source "$DOTFILES/scripts/rdev_bash_helpers"
-try_source "/Users/mvillene/Library/Application Support/zoink/shell/zsh.sh"
+try_source "$HOME/Library/Application Support/zoink/shell/zsh.sh"
 
-export PATH="/Users/mvillene/dev/zoink_dev/bin:$PATH"
+export PATH="$HOME/dev/zoink_dev/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
