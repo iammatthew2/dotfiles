@@ -1,5 +1,6 @@
 # Dotfiles: a set of public configs
 
+
 These dotfiles support:
 
 * [bash](https://www.gnu.org/software/bash/)
